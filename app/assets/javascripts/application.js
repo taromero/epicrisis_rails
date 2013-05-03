@@ -12,4 +12,25 @@
 //
 //= require jquery
 //= require jquery_ujs
+// = require angular.min.js
+// = require angular-resource.min.js
 //= require_tree .
+
+var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource']);
+
+epicrisis.config(function($routeProvider) {
+    $routeProvider.
+      when('/epicrisis', {controller:'EpicrisisListCtrl', templateUrl:'/partials/epicrisis-list.html'}).
+      when('/epicrisis/:id', {controller:'EpicrisisDetailCtrl', templateUrl:'/partials/epicrisis-detail.html'})
+  });
+
+epicrisis.service('restService', ['$resource', function($resource) {
+
+  return {
+    epicrisis: $resource('/epicrisis/:id', { id: '@id' }),
+    infeccion: $resource('/infeccion/:id')
+  }
+
+}]);
+
+epicrisis.controller("EpicrisisDetailCtrl", ['$scope', '$routeParams', 'restService', EpicrisisDetailCtrl]);

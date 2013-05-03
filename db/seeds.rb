@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+	Epicrisis.all.each{ |epicrisis| 
+		epicrisis.delete()
+	}
+
+	@infeccion = Infeccion.create({ nombre: 'unNombre' })
+	Epicrisis.create({ infeccion: @infeccion })

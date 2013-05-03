@@ -21,6 +21,20 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'pg'
+gem "active_model_serializers", "~> 0.7.0"
+
+group :test, :development do
+  gem 'pry'
+  gem 'pry-debugger'
+  gem "rspec-rails", "~> 2.0"
+  gem 'factory_girl_rails'
+  gem 'jasmine'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
