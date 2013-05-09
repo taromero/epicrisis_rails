@@ -33,7 +33,11 @@ group :test, :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'poltergeist', "~>1.2.0"
+  gem 'spork-rails'
 end
 
 # To use ActiveModel has_secure_password

@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(:version => 20130503025213) do
 
   create_table "infeccion", :force => true do |t|
     t.string   "nombre"
-    t.string   "antibioticoUsado"
-    t.boolean  "shockSeptico"
+    t.string   "antibiotico_usado"
+    t.boolean  "shock_septico"
     t.boolean  "curacion"
     t.integer  "epicrisis_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
 end

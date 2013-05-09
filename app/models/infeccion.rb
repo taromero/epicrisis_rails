@@ -1,4 +1,4 @@
 class Infeccion < ActiveRecord::Base
-	attr_accessible :nombre, :antibioticoUsado, :shockSeptico, :curacion
+	attr_accessible :nombre, :antibiotico_usado, :shock_septico, :curacion
 	belongs_to :epicrisis
 end
