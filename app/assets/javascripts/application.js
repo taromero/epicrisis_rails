@@ -16,12 +16,13 @@
 // = require angular-resource.min.js
 //= require_tree .
 
-var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource']);
+var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource', 'ui.directives']);
 
 epicrisis.config(function($routeProvider) {
     $routeProvider.
       when('/epicrisis', {controller:'EpicrisisListCtrl', templateUrl:'/partials/epicrisis-list.html'}).
-      when('/epicrisis/:id', {controller:'EpicrisisDetailCtrl', templateUrl:'/partials/epicrisis-detail.html'})
+      when('/epicrisis/:id', {controller:'EpicrisisDetailCtrl', templateUrl:'/partials/epicrisis-detail.html'}).
+      otherwise({redirectTo: '/epicrisis'})
   });
 
 epicrisis.service('restService', ['$resource', function($resource) {
