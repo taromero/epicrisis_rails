@@ -1,5 +1,10 @@
 FactoryGirl.define do
 
+  factory :cultivo do
+    sequence(:nombre) {|n| (0...8).map{ ('a'..'z').to_a[rand(26)] }.join }
+    positivo false
+  end
+
   factory :infeccion do
     sequence(:nombre) {|n| (0...8).map{ ('a'..'z').to_a[rand(26)] }.join }
     sequence(:antibiotico_usado) {|n| (0...8).map{ ('a'..'z').to_a[rand(26)] }.join }

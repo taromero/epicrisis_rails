@@ -18,6 +18,14 @@ class CreateEpicrisisInfeccion < ActiveRecord::Migration
     	t.integer :epicrisis_id
 
     	t.timestamps
-	end
+	  end
+
+    create_table :cultivo do |t|
+      t.string :nombre
+      t.boolean :positivo
+      t.integer :infeccion_id
+
+      t.timestamps
+    end
   end
 end

@@ -18,11 +18,6 @@ describe('Infeccion', function() {
 		it('should show infeccion information by default', function() {
             expect(template.find('.nombre').val()).toEqual(restService.mockEpicrisis.infeccion.nombre);
         });
-
-        // it('should add a row on otrosCultivos table when clicking on add', function() {
-        //     template.find('#agregarCultivo').click()
-        //     expect(template.find)
-        // });
     });
 
 });

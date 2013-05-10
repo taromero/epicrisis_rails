@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20130503025213) do
 
+  create_table "cultivo", :force => true do |t|
+    t.string   "nombre"
+    t.boolean  "positivo"
+    t.integer  "infeccion_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "epicrisis", :force => true do |t|
     t.integer  "dni"
     t.integer  "nro_historia_clinica"

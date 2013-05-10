@@ -12,7 +12,6 @@ files = [
   JASMINE_ADAPTER,
   'app/assets/javascripts/jquery-1.9.1.min.js',
   'app/assets/javascripts/angular.min.js',
-  'app/assets/javascripts/angular-ui.min.js',
   'app/assets/javascripts/angular-resource.min.js',
   'app/assets/javascripts/angular-mocks.js',
   'app/assets/javascripts/controllers/*.js',
