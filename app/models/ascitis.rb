@@ -1,0 +1,2 @@
+class Ascitis < CultivoGenerico
+end

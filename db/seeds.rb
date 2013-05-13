@@ -10,5 +10,5 @@
 		epicrisis.delete()
 	}
 
-	@infeccion = Infeccion.create({ nombre: 'unNombre' })
-	Epicrisis.create({ infeccion: @infeccion })
+	infeccion = FactoryGirl.create(:infeccion, { nombre: 'unNombre', ascitis: FactoryGirl.create(:ascitis, :non_realized) })
+	Epicrisis.create({ infeccion: infeccion })

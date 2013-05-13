@@ -24,20 +24,20 @@ epicrisis.directive('infeccion', function() {
 							'<th>Resultado</th>' +
 						'</thead>' +
 						'<tbody>' +
-							'<tr>' +
+							'<tr class="hemocultivos">' +
 								'<td>HEMOCULTIVOS</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.positivo"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.realizado" class="realizado"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.positivo" class="positivo"/></td>' +
 							'</tr>' +
-							'<tr>' +
+							'<tr class="urocultivo">' +
 								'<td>UROCULTIVO</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.urocultivo.realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.urocultivo.positivo"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.urocultivo.realizado" class="realizado"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.urocultivo.positivo" class="positivo"/></td>' +
 							'</tr>' +
-							'<tr>' +
+							'<tr class="ascitis">' +
 								'<td>ASCITIS</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.ascitis.realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.ascitis.positivo"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.ascitis.realizado" class="realizado"/></td>' +
+								'<td><input type="checkbox" ng-model="infeccion.ascitis.positivo" class="positivo"/></td>' +
 							'</tr>' +
 						'</tbody>' +
 					'</table>' +
@@ -49,6 +49,9 @@ epicrisis.directive('infeccion', function() {
 					'<div>' +
 						'Curación' +
 						'<input type="text" ng-model="infeccion.curacion"/>' +
+					'</div>' +
+					'<div>' +
+						'<a ng-click="update()" id="addCultivo" class="btn btn-primary">Guardar</a>' +
 					'</div>' +
 				'</div>' +
 			'</div>' +

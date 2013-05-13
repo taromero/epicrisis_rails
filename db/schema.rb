@@ -13,8 +13,9 @@
 
 ActiveRecord::Schema.define(:version => 20130503025213) do
 
-  create_table "cultivo", :force => true do |t|
+  create_table "cultivo_generico", :force => true do |t|
     t.string   "nombre"
+    t.string   "type"
     t.boolean  "positivo"
     t.integer  "infeccion_id"
     t.datetime "created_at",   :null => false

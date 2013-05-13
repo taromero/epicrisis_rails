@@ -30,4 +30,17 @@ describe InfeccionController do
 
   end
 
+  describe "Update ascitis/hemocultivos/urocultivo" do
+
+    # it "should set positivo to false if realizado is set true and positivo was false to any cultivo" do
+    #   infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :non_realized))
+    #   epi = create(:epicrisis, infeccion: infeccion.create(infeccion_params))
+    #   put :update, { epicrisi_id: @epi.id, infeccion: { realizado: true } }
+    #   body = JSON.parse(response.body)
+    #   body['infeccion']['positivo'].should == true
+    #   Infeccion.first.positivo.should == true
+    # end
+
+  end
+
 end
