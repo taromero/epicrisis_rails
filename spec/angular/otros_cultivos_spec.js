@@ -1,15 +1,18 @@
 describe('Otros cultivos de una infeccion', function() {
 	var $scope, template;
     var restService;
+    jasmine.getFixtures().fixturesPath = 'public/partials/';
 	beforeEach(function() {
-        template = angular.element('<otroscultivos></otroscultivos>');
+        template = angular.element('<infeccion-detail></infeccion-detail>');
         module('epicrisis');
         module('epicrisisMocks');
-        inject(function($injector, $controller, $rootScope, $compile) {
+        inject(function($injector, $controller, $rootScope, $compile, $templateCache) {
+            $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
+            $templateCache.put('partials/otros-cultivos.html', jasmine.getFixtures().getFixtureHtml_('otros-cultivos.html'));
             restService = $injector.get('restService');
         	$scope = $rootScope.$new();
+            $scope.epicrisis = restService.mockEpicrisis;
             $compile(template)($scope);
-            controller = $controller("EpicrisisDetailCtrl", {$scope: $scope, restService: restService})
             $scope.$apply();
         })
     });
@@ -17,6 +20,7 @@ describe('Otros cultivos de una infeccion', function() {
     it('should add a row on otrosCultivos table with the form when clicking on add', function() {
         expect(template.find('tr.newForm').css('display')).toBe('none');
         template.find('#newCultivo').click();
+        expect($scope.newFormEnabled).toBe(true);
         expect(template.find('tr.newForm').css('display')).toBe('');
     });
 
@@ -27,6 +31,6 @@ describe('Otros cultivos de una infeccion', function() {
         template.find('#addCultivo').click();
 
         expect(template.find('tr.newForm').css('display')).toBe(''); 
-        expect(template.find('tbody tr').length).toBe(2); 
+        expect(template.find('.otrosCultivos tbody tr').length).toBe(2); 
     });
 });

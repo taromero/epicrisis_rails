@@ -14,7 +14,6 @@ files = [
   'app/assets/javascripts/angular.min.js',
   'app/assets/javascripts/angular-resource.min.js',
   'app/assets/javascripts/angular-mocks.js',
-  'app/assets/javascripts/controllers/*.js',
   'app/assets/javascripts/directives/*.js',
   'app/assets/javascripts/**/*.js',
   'spec/angular/jasmine-jquery-1.3.1.js',

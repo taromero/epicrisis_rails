@@ -9,6 +9,7 @@ describe('Infeccion', function() {
             module('epicrisisMocks');
             inject(function($injector, $rootScope, $compile, $templateCache) {
                 $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
+                $templateCache.put('partials/otros-cultivos.html', jasmine.getFixtures().getFixtureHtml_('otros-cultivos.html'));
                 restService = $injector.get('restService');
             	$scope = $rootScope.$new();
                 $scope.epicrisis = restService.mockEpicrisis;

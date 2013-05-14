@@ -48,7 +48,8 @@ describe InfeccionController do
       [true, false, true, true],
       [true, true, true, true],
     ].each do |positivoPreviousValue, realizado, positivo, positivoNewValue|
-      it "if realizado is #{realizado} and positivo is #{positivo}, positivo's new value should be #{positivoNewValue}" do
+      it "if positivo's previous value was #{positivoPreviousValue || 'nil'} and realizado is #{realizado} and 
+            positivo is #{positivo}, positivo's new value should be #{positivoNewValue}" do
         epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, positivo: positivoPreviousValue)))
         put :update, { epicrisi_id: epi.id, ascitis: { positivo: positivo, realizado: realizado } }
         body = JSON.parse(response.body)
