@@ -10,6 +10,8 @@ epicrisisMocks.service('restService', ['$resource', function($resource) {
 
   return { 
     epicrisis: { get: function(params, callback) { callback({ epicrisis: epicrisis }) } } ,
+    infeccion: { get: function(params, callback) { callback({ infeccion: infeccion }) }, 
+    				save: function(infeccion, callback) { callback({ infeccion: infeccion }) } } ,
     cultivos: { save: function(cultivo) { return cultivo; } },
     mockEpicrisis: epicrisis
   }

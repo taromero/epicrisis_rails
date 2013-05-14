@@ -23,6 +23,10 @@ describe('Infeccion', function() {
             testRealizadoMarkedIfPositivoIsTrue('ascitis');
             testRealizadoMarkedIfPositivoIsTrue('hemocultivos');
             testRealizadoMarkedIfPositivoIsTrue('urocultivo');
+            // $scope.update();
+            // testRealizadoMarkedIfPositivoIsTrue('ascitis');
+            // testRealizadoMarkedIfPositivoIsTrue('hemocultivos');
+            // testRealizadoMarkedIfPositivoIsTrue('urocultivo');
         });
 
         it("should show realizado's checkbox marked if positivo is false for a cultivo", function() {

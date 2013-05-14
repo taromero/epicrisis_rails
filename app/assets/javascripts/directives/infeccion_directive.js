@@ -10,7 +10,7 @@ epicrisis.directive('infeccion', function() {
 			'<blockquote>' +
 				'<strong><p class="lead">Infeccion <a class="btn" ng-click=""><i class="icon-plus"></i></a></p></strong>' +
 			'</blockquote>' +
-			'<div class="content" ng-show="epicrisis.infeccion != null">' +
+			'<div class="content" ng-show="infeccion != null">' +
 				'<div>' +
 					'Nombre' +
 					'<input type="text" class="nombre" ng-model="infeccion.nombre"/>' +

@@ -12,8 +12,8 @@ class InfeccionController < ApplicationController
 		infeccion.nombre = params[:nombre]
 		params_ascitis = params[:ascitis]
 		infeccion.ascitis.positivo = 
-		if params_ascitis[:realizado] == false and params_ascitis[:positivo] == false and infeccion.ascitis.positivo == nil
-			infeccion.ascitis.positivo = infeccion.ascitis.positivo
+		if params_ascitis[:realizado] == false and params_ascitis[:positivo] == false
+			infeccion.ascitis.positivo = nil
 		else
 			params_ascitis[:positivo]
 		end

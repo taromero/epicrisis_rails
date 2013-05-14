@@ -1,10 +1,10 @@
 function EpicrisisDetailCtrl($scope, $routeParams, restService) {
-	restService.epicrisis.get({ id: $routeParams.id}, function(data) {
-	    $scope.epicrisis = data.epicrisis;
-	    $scope.infeccion = $scope.epicrisis.infeccion;
-	    $scope.infeccion.hemocultivos.realizado = data.epicrisis.infeccion.hemocultivos.positivo != null;
-	    $scope.infeccion.urocultivo.realizado = data.epicrisis.infeccion.urocultivo.positivo != null;
-	    $scope.infeccion.ascitis.realizado = data.epicrisis.infeccion.ascitis.positivo != null;
+	var epicrisisId = $routeParams.id;
+	restService.infeccion.get({ epicrisisId: $routeParams.id}, function(data) {
+	    $scope.infeccion = data.infeccion;
+	    $scope.infeccion.hemocultivos.realizado = $scope.infeccion.hemocultivos.positivo != null;
+	    $scope.infeccion.urocultivo.realizado = $scope.infeccion.urocultivo.positivo != null;
+	    $scope.infeccion.ascitis.realizado = $scope.infeccion.ascitis.positivo != null;
 	    $scope.nuevoCultivo = {};
 	});
 
@@ -14,12 +14,14 @@ function EpicrisisDetailCtrl($scope, $routeParams, restService) {
 
 	$scope.addCultivo = function() {
     	$scope.nuevoCultivo.epicrisis = $scope.epicrisis;
-		$scope.epicrisis.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
+		$scope.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
 	}
 
 	$scope.update = function() {
-		$scope.epicrisis.infeccion.epicrisisId = $scope.epicrisis.id;
-		restService.infeccion.update($scope.epicrisis.infeccion);
+		$scope.infeccion.epicrisisId = epicrisisId;
+		restService.infeccion.update($scope.infeccion, function(data) {
+			$scope.infeccion = data.infeccion
+		});
 	}
 
 }
