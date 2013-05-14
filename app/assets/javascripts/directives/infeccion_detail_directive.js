@@ -7,8 +7,10 @@ epicrisis.directive('infeccionDetail', function() {
     transclude: true,
     scope: false,
     controller: function($scope, restService) {
-	    $scope.infeccion = $scope.epicrisis.infeccion;
-	    setRealizado()
+    	$scope.$watch('epicrisis', function() {
+		    $scope.infeccion = $scope.epicrisis.infeccion;
+		    setRealizado()
+		});
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;

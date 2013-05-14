@@ -52,7 +52,7 @@ describe('Infeccion', function() {
 
         function testRealizadoMarkedIfPositivoIsTrue(property){
             recompile(property, true);
-            // expect($scope.infeccion[property]['positivo']).toBe(true);
+            expect($scope.infeccion[property]['positivo']).toBe(true);
             expect($scope.infeccion[property]['realizado']).toBe(true);
             expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
         }
