@@ -1,0 +1,2 @@
+class Hemocultivos < CultivoGenerico
+end

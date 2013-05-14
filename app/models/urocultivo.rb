@@ -1,0 +1,2 @@
+class Urocultivo < CultivoGenerico
+end

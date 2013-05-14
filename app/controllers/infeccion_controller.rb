@@ -7,9 +7,17 @@ class InfeccionController < ApplicationController
 
 	def update
 		epi = Epicrisis.find(params[:epicrisi_id])
-		epi.infeccion = epi.infeccion || Infeccion.new 
-		epi.infeccion.nombre = params[:infeccion][:nombre]
-		epi.infeccion.save!
+		infeccion = epi.infeccion
+		infeccion = infeccion || Infeccion.new 
+		infeccion.nombre = params[:nombre]
+		params_ascitis = params[:ascitis]
+		infeccion.ascitis.positivo = 
+		if params_ascitis[:realizado] == false and params_ascitis[:positivo] == false and infeccion.ascitis.positivo == nil
+			infeccion.ascitis.positivo = infeccion.ascitis.positivo
+		else
+			params_ascitis[:positivo]
+		end
+		infeccion.save!
 		epi.save!
 		render json: epi.infeccion
 	end

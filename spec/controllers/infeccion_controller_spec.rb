@@ -17,9 +17,11 @@ describe InfeccionController do
     end
 
     it "should update infeccion" do
-      infeccion_params = FactoryGirl.attributes_for(:infeccion)
+      infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :pos))
+      infeccion_params[:ascitis] = { realizado: true, positivo: true }
       Infeccion.find(@inf.id).nombre.should_not eq infeccion_params[:nombre]
-      put :update, { epicrisi_id: @epi.id, infeccion: infeccion_params }
+      infeccion_params[:epicrisi_id] = @epi.id
+      put :update, infeccion_params
       body = JSON.parse(response.body)
       Infeccion.count.should eq 1
 
@@ -32,14 +34,28 @@ describe InfeccionController do
 
   describe "Update ascitis/hemocultivos/urocultivo" do
 
-    # it "should set positivo to false if realizado is set true and positivo was false to any cultivo" do
-    #   infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :non_realized))
-    #   epi = create(:epicrisis, infeccion: infeccion.create(infeccion_params))
-    #   put :update, { epicrisi_id: @epi.id, infeccion: { realizado: true } }
-    #   body = JSON.parse(response.body)
-    #   body['infeccion']['positivo'].should == true
-    #   Infeccion.first.positivo.should == true
-    # end
+    [
+      [nil, false, false, nil],
+      [nil, true, true, true],
+      [nil, false, true, true],
+      [nil, true, false, false],
+      [false, false, true, true],
+      [false, true, false, false],
+      [false, false, false, false],
+      [false, true, true, true],
+      [true, false, false, false],
+      [true, true, false, false],
+      [true, false, true, true],
+      [true, true, true, true],
+    ].each do |positivoPreviousValue, realizado, positivo, positivoNewValue|
+      it "if realizado is #{realizado} and positivo is #{positivo}, positivo's new value should be #{positivoNewValue}" do
+        epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, positivo: positivoPreviousValue)))
+        put :update, { epicrisi_id: epi.id, ascitis: { positivo: positivo, realizado: realizado } }
+        body = JSON.parse(response.body)
+        body['infeccion']['ascitis']['positivo'].should == positivoNewValue
+        Infeccion.first.ascitis.positivo.should == positivoNewValue
+      end
+    end
 
   end
 

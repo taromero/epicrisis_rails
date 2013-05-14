@@ -17,6 +17,9 @@ function EpicrisisDetailCtrl($scope, $routeParams, restService) {
 		$scope.epicrisis.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
 	}
 
-
+	$scope.update = function() {
+		$scope.epicrisis.infeccion.epicrisisId = $scope.epicrisis.id;
+		restService.infeccion.update($scope.epicrisis.infeccion);
+	}
 
 }

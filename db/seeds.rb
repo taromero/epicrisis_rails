@@ -10,5 +10,7 @@
 		epicrisis.delete()
 	}
 
-	infeccion = FactoryGirl.create(:infeccion, { nombre: 'unNombre', ascitis: FactoryGirl.create(:ascitis, :non_realized) })
+	infeccion = FactoryGirl.create(:infeccion, { nombre: 'unNombre', ascitis: FactoryGirl.create(:ascitis, :non_realized),
+												hemocultivos: FactoryGirl.create(:hemocultivos, :pos), 
+												urocultivo: FactoryGirl.create(:urocultivo) })
 	Epicrisis.create({ infeccion: infeccion })
