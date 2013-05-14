@@ -1,17 +1,15 @@
 var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource']);
 
-epicrisis.directive('infeccion', function() {
+epicrisis.directive('infeccionDetail', function() {
 
   return {
     restrict: 'E',
     transclude: true,
+    scope: false,
     controller: function($scope, $routeParams, restService) {
-		var epicrisisId = $routeParams.id;
-		restService.infeccion.get({ epicrisisId: $routeParams.id}, function(data) {
-		    $scope.infeccion = data.infeccion;
-		    setRealizado()
-		    $scope.nuevoCultivo = {};
-		});
+	    $scope.infeccion = $scope.epicrisis.infeccion;
+	    setRealizado()
+	    $scope.nuevoCultivo = {};
 
 		$scope.newCultivo = function() {
 			$scope.newFormEnabled = true;
@@ -23,7 +21,7 @@ epicrisis.directive('infeccion', function() {
 		}
 
 		$scope.update = function() {
-			$scope.infeccion.epicrisisId = epicrisisId;
+			$scope.infeccion.epicrisisId = $scope.epicrisisId;
 			restService.infeccion.update($scope.infeccion, function(data) {
 				$scope.infeccion = data.infeccion;
 				setRealizado()
