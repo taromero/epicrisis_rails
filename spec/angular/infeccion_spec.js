@@ -20,14 +20,20 @@ describe('Infeccion', function() {
             expect(template.find('.nombre').val()).toEqual(restService.mockEpicrisis.infeccion.nombre);
         });
 
+        it("should update realizado's checkbox when infeccion is updated", function() {
+            testRealizadoMarkedIfPositivoIsTrue('ascitis');
+            $scope.infeccion['ascitis']['positivo'] = null;
+            $scope.update();
+            expect($scope.infeccion['ascitis']['realizado']).toBe(false);
+            $scope.infeccion['ascitis']['positivo'] = false;
+            $scope.update();
+            expect($scope.infeccion['ascitis']['realizado']).toBe(true);
+        });
+
         it("should show realizado's checkbox marked if positivo is true for a cultivo", function() {
             testRealizadoMarkedIfPositivoIsTrue('ascitis');
             testRealizadoMarkedIfPositivoIsTrue('hemocultivos');
             testRealizadoMarkedIfPositivoIsTrue('urocultivo');
-            // $scope.update();
-            // testRealizadoMarkedIfPositivoIsTrue('ascitis');
-            // testRealizadoMarkedIfPositivoIsTrue('hemocultivos');
-            // testRealizadoMarkedIfPositivoIsTrue('urocultivo');
         });
 
         it("should show realizado's checkbox marked if positivo is false for a cultivo", function() {
@@ -64,7 +70,7 @@ describe('Infeccion', function() {
         }
 
         function recompile(property, positivo){
-           inject(function($compile) {
+            inject(function($compile) {
                 template = angular.element('<infeccion></infeccion>');
                 restService.mockEpicrisis.infeccion[property]['positivo'] = positivo;
                 $compile(template)($scope);
