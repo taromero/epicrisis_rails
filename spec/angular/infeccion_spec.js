@@ -2,15 +2,16 @@ describe('Infeccion', function() {
     describe('infeccion section', function() {
         var $scope, template;
         var restService;
+        jasmine.getFixtures().fixturesPath = 'public/partials/';
     	beforeEach(function() {
             template = angular.element('<infeccion></infeccion>');
             module('epicrisis');
             module('epicrisisMocks');
-            inject(function($injector, $controller, $rootScope, $compile) {
+            inject(function($injector, $rootScope, $compile, $templateCache) {
+                $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
                 restService = $injector.get('restService');
             	$scope = $rootScope.$new();
                 $compile(template)($scope);
-                controller = $controller("EpicrisisDetailCtrl", {$scope: $scope, restService: restService})
                 $scope.$apply();
             })
         });
@@ -42,36 +43,33 @@ describe('Infeccion', function() {
         });
 
         function testRealizadoMarkedIfPositivoIsTrue(property){
-            inject(function($controller) {
-                restService.mockEpicrisis.infeccion[property]['positivo'] = true;
-                controller = $controller("EpicrisisDetailCtrl", {$scope: $scope, restService: restService})
-                $scope.$apply();
-            });
+            recompile(property, true);
             expect($scope.infeccion[property]['positivo']).toBe(true);
             expect($scope.infeccion[property]['realizado']).toBe(true);
             expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
         }
 
         function testRealizadoMarkedIfPositivoIsFalse(property){
-            inject(function($controller) {
-                restService.mockEpicrisis.infeccion[property]['positivo'] = false;
-                controller = $controller("EpicrisisDetailCtrl", {$scope: $scope, restService: restService})
-                $scope.$apply();
-            });
+            recompile(property, false);
             expect($scope.infeccion[property]['positivo']).toBe(false);
             expect($scope.infeccion[property]['realizado']).toBe(true);
             expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
         }
 
         function testRealizadoNOTMarkedIfPositivoIsNull(property){
-            inject(function($controller) {
-                restService.mockEpicrisis.infeccion[property]['positivo'] = null;
-                controller = $controller("EpicrisisDetailCtrl", {$scope: $scope, restService: restService})
-                $scope.$apply();
-            });
+            recompile(property, null);
             expect($scope.infeccion[property]['positivo']).toBe(null);
             expect($scope.infeccion[property]['realizado']).toBe(false);
             expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(false);
+        }
+
+        function recompile(property, positivo){
+           inject(function($compile) {
+                template = angular.element('<infeccion></infeccion>');
+                restService.mockEpicrisis.infeccion[property]['positivo'] = positivo;
+                $compile(template)($scope);
+                $scope.$apply();
+            }); 
         }
     });
 

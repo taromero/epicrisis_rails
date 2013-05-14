@@ -17,10 +17,14 @@ files = [
   'app/assets/javascripts/controllers/*.js',
   'app/assets/javascripts/directives/*.js',
   'app/assets/javascripts/**/*.js',
+  'spec/angular/jasmine-jquery-1.3.1.js',
   'spec/angular/angularMocks.js',
   'spec/**/*_spec.js'
 ];
 
+proxies = {
+'/' : 'http://localhost:3502/'
+};
 
 // list of files to exclude
 exclude = [

@@ -5,57 +5,33 @@ epicrisis.directive('infeccion', function() {
   return {
     restrict: 'E',
     transclude: true,
-    template:
-        '<div id="infeccion" class="span4 container" style="border: 1px solid #ccc;" ng-controller="EpicrisisDetailCtrl">' +
-			'<blockquote>' +
-				'<strong><p class="lead">Infeccion <a class="btn" ng-click=""><i class="icon-plus"></i></a></p></strong>' +
-			'</blockquote>' +
-			'<div class="content" ng-show="infeccion != null">' +
-				'<div>' +
-					'Nombre' +
-					'<input type="text" class="nombre" ng-model="infeccion.nombre"/>' +
-				'</div>' +
-				'<div>' +
-					'Cultivos:' +
-					'<table class="table table-striped table-bordered table-hover table-condensed">' +
-						'<thead>' +
-							'<th>Cultivo</th>' +
-							'<th>Realizado</th>' +
-							'<th>Resultado</th>' +
-						'</thead>' +
-						'<tbody>' +
-							'<tr class="hemocultivos">' +
-								'<td>HEMOCULTIVOS</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.realizado" class="realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.hemocultivos.positivo" class="positivo"/></td>' +
-							'</tr>' +
-							'<tr class="urocultivo">' +
-								'<td>UROCULTIVO</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.urocultivo.realizado" class="realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.urocultivo.positivo" class="positivo"/></td>' +
-							'</tr>' +
-							'<tr class="ascitis">' +
-								'<td>ASCITIS</td>' +
-								'<td><input type="checkbox" ng-model="infeccion.ascitis.realizado" class="realizado"/></td>' +
-								'<td><input type="checkbox" ng-model="infeccion.ascitis.positivo" class="positivo"/></td>' +
-							'</tr>' +
-						'</tbody>' +
-					'</table>' +
-					'<otroscultivos></otroscultivos>' +
-					'<div>' +
-						'Shock Septico' +
-						'<input type="text" ng-model="infeccion.shockSeptico"/>	' +
-					'</div>' +
-					'<div>' +
-						'Curación' +
-						'<input type="text" ng-model="infeccion.curacion"/>' +
-					'</div>' +
-					'<div>' +
-						'<a ng-click="update()" id="addCultivo" class="btn btn-primary">Guardar</a>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-		'</div>',
+    controller: function($scope, $routeParams, restService) {
+		var epicrisisId = $routeParams.id;
+		restService.infeccion.get({ epicrisisId: $routeParams.id}, function(data) {
+		    $scope.infeccion = data.infeccion;
+		    $scope.infeccion.hemocultivos.realizado = $scope.infeccion.hemocultivos.positivo != null;
+		    $scope.infeccion.urocultivo.realizado = $scope.infeccion.urocultivo.positivo != null;
+		    $scope.infeccion.ascitis.realizado = $scope.infeccion.ascitis.positivo != null;
+		    $scope.nuevoCultivo = {};
+		});
+
+		$scope.newCultivo = function(){
+			$scope.newFormEnabled = true;
+		}
+
+		$scope.addCultivo = function() {
+	    	$scope.nuevoCultivo.epicrisis = $scope.epicrisis;
+			$scope.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
+		}
+
+		$scope.update = function() {
+			$scope.infeccion.epicrisisId = epicrisisId;
+			restService.infeccion.update($scope.infeccion, function(data) {
+				$scope.infeccion = data.infeccion
+			});
+		}
+	},
+    templateUrl: 'partials/infeccion-detail.html',
     replace: true
   }
 
