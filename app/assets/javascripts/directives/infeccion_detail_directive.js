@@ -6,19 +6,9 @@ epicrisis.directive('infeccionDetail', function() {
     restrict: 'E',
     transclude: true,
     scope: false,
-    controller: function($scope, $routeParams, restService) {
+    controller: function($scope, restService) {
 	    $scope.infeccion = $scope.epicrisis.infeccion;
 	    setRealizado()
-	    $scope.nuevoCultivo = {};
-
-		$scope.newCultivo = function() {
-			$scope.newFormEnabled = true;
-		}
-
-		$scope.addCultivo = function() {
-	    	$scope.nuevoCultivo.epicrisis = $scope.epicrisis;
-			$scope.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
-		}
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;
@@ -40,11 +30,23 @@ epicrisis.directive('infeccionDetail', function() {
 
 });
 
-epicrisis.directive('otroscultivos', function() {
+epicrisis.directive('otrosCultivos', function() {
 	return {
 	    restrict: 'E',
 	    transclude: true,
 	    scope: false,
+	    controller: function($scope, restService) {
+			$scope.nuevoCultivo = {};
+			
+			$scope.newCultivo = function() {
+				$scope.newFormEnabled = true;
+			}
+
+			$scope.addCultivo = function() {
+		    	$scope.nuevoCultivo.epicrisis = $scope.epicrisis;
+				$scope.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
+			}
+		},
 	    templateUrl: 'partials/otros-cultivos.html',
 	    replace: true
 	}

@@ -33,17 +33,17 @@
 					</tr>
 				</tbody>
 			</table>
-			<otroscultivos></otroscultivos>
+			<otros-cultivos></otros-cultivos>
 			<div>
 				Shock Septico
-				<input type="text" ng-model="infeccion.shockSeptico"/>	
+				<input type="checkbox" ng-model="infeccion.shockSeptico"/>	
 			</div>
 			<div>
 				Curación
-				<input type="text" ng-model="infeccion.curacion"/>
+				<input type="checkbox" ng-model="infeccion.curacion"/>
 			</div>
 			<div>
-				<a ng-click="update()" id="addCultivo" class="btn btn-primary">Guardar</a>
+				<a ng-click="update()" class="btn btn-primary">Guardar</a>
 			</div>
 		</div>
 	</div>
