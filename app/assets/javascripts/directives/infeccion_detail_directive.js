@@ -7,10 +7,30 @@ epicrisis.directive('infeccionDetail', function() {
     transclude: true,
     scope: false,
     controller: function($scope, restService) {
+    	var standardCultivos;
     	$scope.$watch('epicrisis', function() {
 		    $scope.infeccion = $scope.epicrisis.infeccion;
+		    standardCultivos = [$scope.infeccion.ascitis,
+								$scope.infeccion.hemocultivos,
+								$scope.infeccion.urocultivo];
 		    setRealizado()
 		});
+
+		$scope.$watch(function() { 
+			return _(standardCultivos).map(function(cultivo) { return cultivo.positivo });
+		}, function() {
+		    setRealizado();
+		}, true);
+
+		$scope.$watch(function() { 
+			return _(standardCultivos).map(function(cultivo) { return cultivo.realizado });
+		}, function() {
+			_(standardCultivos).each(function(cultivo) {
+					if(cultivo.positivo == true && cultivo.realizado == false){
+			    		cultivo.positivo = null;
+				    }
+				});
+		}, true);
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;
@@ -21,9 +41,9 @@ epicrisis.directive('infeccionDetail', function() {
 		}
 
 		function setRealizado() {
-			$scope.infeccion.hemocultivos.realizado = $scope.infeccion.hemocultivos.positivo != null;
-		    $scope.infeccion.urocultivo.realizado = $scope.infeccion.urocultivo.positivo != null;
-		    $scope.infeccion.ascitis.realizado = $scope.infeccion.ascitis.positivo != null;
+			_(standardCultivos).each(function(cultivo) {
+				cultivo.realizado = cultivo.positivo != null;
+			});
 		}
 	},
     templateUrl: 'partials/infeccion-detail.html',

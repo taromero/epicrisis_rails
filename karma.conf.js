@@ -14,11 +14,11 @@ files = [
   'app/assets/javascripts/angular.min.js',
   'app/assets/javascripts/angular-resource.min.js',
   'app/assets/javascripts/angular-mocks.js',
-  'app/assets/javascripts/controllers/*.js',
+  'app/assets/javascripts/underscore-min.js',
   'app/assets/javascripts/directives/*.js',
   'app/assets/javascripts/**/*.js',
-  'spec/angular/jasmine-jquery-1.3.1.js',
-  'spec/angular/angularMocks.js',
+  'spec/angular/libs/jasmine-jquery-1.3.1.js',
+  'spec/angular/libs/mocks.js',
   'spec/**/*_spec.js'
 ];
 
@@ -66,7 +66,8 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
+// browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it

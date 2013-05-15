@@ -11,7 +11,7 @@ describe('Infeccion', function() {
                 $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
                 $templateCache.put('partials/otros-cultivos.html', jasmine.getFixtures().getFixtureHtml_('otros-cultivos.html'));
                 restService = $injector.get('restService');
-            	$scope = $rootScope.$new();
+                $scope = $rootScope.$new();
                 $scope.epicrisis = restService.mockEpicrisis;
                 $compile(template)($scope);
                 $scope.$apply();
@@ -23,7 +23,6 @@ describe('Infeccion', function() {
         });
 
         it("should update realizado's checkbox when infeccion is updated", function() {
-            testRealizadoMarkedIfPositivoIsTrue('ascitis');
             $scope.infeccion['ascitis']['positivo'] = null;
             $scope.update();
             expect($scope.infeccion['ascitis']['realizado']).toBe(false);
@@ -32,53 +31,68 @@ describe('Infeccion', function() {
             expect($scope.infeccion['ascitis']['realizado']).toBe(true);
         });
 
-        it("should show realizado's checkbox marked if positivo is true for a cultivo", function() {
-            testRealizadoMarkedIfPositivoIsTrue('ascitis');
-            testRealizadoMarkedIfPositivoIsTrue('hemocultivos');
-            testRealizadoMarkedIfPositivoIsTrue('urocultivo');
-        });
+        describe('standard cultivos', function() {
+            it("should show realizado's checkbox marked if positivo is true for a cultivo", function() {
+                _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
+                    $scope.infeccion[property]['positivo'] = true;
+                    $scope.$apply();
+                    expect($scope.infeccion[property]['positivo']).toBe(true);
+                    expect($scope.infeccion[property]['realizado']).toBe(true);
+                    expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
+                });
+            });
 
-        it("should show realizado's checkbox marked if positivo is false for a cultivo", function() {
-            testRealizadoMarkedIfPositivoIsFalse('ascitis');
-            testRealizadoMarkedIfPositivoIsFalse('hemocultivos');
-            testRealizadoMarkedIfPositivoIsFalse('urocultivo');
-        });
+            it("should show realizado's checkbox marked if positivo is false for a cultivo", function() {
+                _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
+                    $scope.infeccion[property]['positivo'] = false;
+                    $scope.$apply();
+                    expect($scope.infeccion[property]['positivo']).toBe(false);
+                    expect($scope.infeccion[property]['realizado']).toBe(true);
+                    expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
+                });
+            });
 
-        it("should show realizado's checkbox NOT marked if positivo is null for a cultivo", function() {
-            testRealizadoNOTMarkedIfPositivoIsNull('ascitis');
-            testRealizadoNOTMarkedIfPositivoIsNull('hemocultivos');
-            testRealizadoNOTMarkedIfPositivoIsNull('urocultivo');
-        });
+            it("should show realizado's checkbox NOT marked if positivo is null for a cultivo", function() {
+                _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
+                    $scope.infeccion[property]['positivo'] = null;
+                    $scope.$apply();
+                    expect($scope.infeccion[property]['positivo']).toBe(null);
+                    expect($scope.infeccion[property]['realizado']).toBe(false);
+                    expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(false);
+                });
+            });
 
-        function testRealizadoMarkedIfPositivoIsTrue(property){
-            recompile(property, true);
-            expect($scope.infeccion[property]['positivo']).toBe(true);
-            expect($scope.infeccion[property]['realizado']).toBe(true);
-            expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
-        }
+            describe('realizado', function(){
+                it("should watch positivo's value and update accordingly", function() {
+                    _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
+                        $scope.infeccion[property]['positivo'] = null;
+                        $scope.$apply();
+                        expect($scope.infeccion[property]['realizado']).toBe(false);
+                        $scope.infeccion[property]['positivo'] = false;
+                        $scope.$apply();
+                        expect($scope.infeccion[property]['realizado']).toBe(true);
+                        $scope.infeccion[property]['positivo'] = true;
+                        $scope.$apply();
+                        expect($scope.infeccion[property]['realizado']).toBe(true);
+                        $scope.infeccion[property]['positivo'] = null;
+                        $scope.$apply();
+                        expect($scope.infeccion[property]['realizado']).toBe(false);
+                    });
+                });
+            });
 
-        function testRealizadoMarkedIfPositivoIsFalse(property){
-            recompile(property, false);
-            expect($scope.infeccion[property]['positivo']).toBe(false);
-            expect($scope.infeccion[property]['realizado']).toBe(true);
-            expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(true);
-        }
-
-        function testRealizadoNOTMarkedIfPositivoIsNull(property){
-            recompile(property, null);
-            expect($scope.infeccion[property]['positivo']).toBe(null);
-            expect($scope.infeccion[property]['realizado']).toBe(false);
-            expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(false);
-        }
-
-        function recompile(property, positivo){
-            inject(function($compile) {
-                template = angular.element('<infeccion-detail></infeccion-detail>');
-                restService.mockEpicrisis.infeccion[property]['positivo'] = positivo;
-                $compile(template)($scope);
-                $scope.$apply();
-            }); 
-        }
+            describe('positivo', function(){
+                it("should watch realizado's value and update accordingly", function() {
+                    _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
+                        $scope.infeccion[property]['positivo'] = true;
+                        $scope.$apply()
+                        $scope.infeccion[property]['realizado'] = false;
+                        $scope.$apply()
+                        expect($scope.infeccion[property]['positivo']).toBe(null);
+                    });
+                })
+            });
+        })
     });
 
 });
