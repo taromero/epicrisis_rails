@@ -26,10 +26,10 @@ epicrisis.directive('infeccionDetail', function() {
 			return _(standardCultivos).map(function(cultivo) { return cultivo.realizado });
 		}, function() {
 			_(standardCultivos).each(function(cultivo) {
-					if(cultivo.positivo == true && cultivo.realizado == false){
-			    		cultivo.positivo = null;
-				    }
-				});
+				if(cultivo.positivo == true && cultivo.realizado == false){
+		    		cultivo.positivo = null;
+			    }
+			});
 		}, true);
 
 		$scope.update = function() {

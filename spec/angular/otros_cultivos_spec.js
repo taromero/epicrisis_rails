@@ -1,14 +1,12 @@
 describe('Otros cultivos de una infeccion', function() {
 	var $scope, template;
     var restService;
-    jasmine.getFixtures().fixturesPath = 'public/partials/';
 	beforeEach(function() {
         template = angular.element('<infeccion-detail></infeccion-detail>');
         module('epicrisis');
         module('epicrisisMocks');
         inject(function($injector, $controller, $rootScope, $compile, $templateCache) {
-            $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
-            $templateCache.put('partials/otros-cultivos.html', jasmine.getFixtures().getFixtureHtml_('otros-cultivos.html'));
+            loadTemplates($templateCache);
             restService = $injector.get('restService');
         	$scope = $rootScope.$new();
             $scope.epicrisis = restService.mockEpicrisis;

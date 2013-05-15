@@ -19,6 +19,7 @@ files = [
   'app/assets/javascripts/**/*.js',
   'spec/angular/libs/jasmine-jquery-1.3.1.js',
   'spec/angular/libs/mocks.js',
+  'spec/angular/helpers/templatesLoader.js',
   'spec/**/*_spec.js'
 ];
 

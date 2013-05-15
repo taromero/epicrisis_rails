@@ -2,14 +2,12 @@ describe('Infeccion', function() {
     describe('infeccion section', function() {
         var $scope, template;
         var restService;
-        jasmine.getFixtures().fixturesPath = 'public/partials/';
     	beforeEach(function() {
             template = angular.element('<infeccion-detail></infeccion-detail>');
             module('epicrisis');
             module('epicrisisMocks');
             inject(function($injector, $rootScope, $compile, $templateCache) {
-                $templateCache.put('partials/infeccion-detail.html', jasmine.getFixtures().getFixtureHtml_('infeccion-detail.html'));
-                $templateCache.put('partials/otros-cultivos.html', jasmine.getFixtures().getFixtureHtml_('otros-cultivos.html'));
+                loadTemplates($templateCache);
                 restService = $injector.get('restService');
                 $scope = $rootScope.$new();
                 $scope.epicrisis = restService.mockEpicrisis;
@@ -65,18 +63,11 @@ describe('Infeccion', function() {
             describe('realizado', function(){
                 it("should watch positivo's value and update accordingly", function() {
                     _(['ascitis', 'hemocultivos','urocultivo']).each(function(property) {
-                        $scope.infeccion[property]['positivo'] = null;
-                        $scope.$apply();
-                        expect($scope.infeccion[property]['realizado']).toBe(false);
-                        $scope.infeccion[property]['positivo'] = false;
-                        $scope.$apply();
-                        expect($scope.infeccion[property]['realizado']).toBe(true);
-                        $scope.infeccion[property]['positivo'] = true;
-                        $scope.$apply();
-                        expect($scope.infeccion[property]['realizado']).toBe(true);
-                        $scope.infeccion[property]['positivo'] = null;
-                        $scope.$apply();
-                        expect($scope.infeccion[property]['realizado']).toBe(false);
+                        _([[null, false], [false, true], [true, true], [null, false]]).each(function(positivo_realizado) {
+                            $scope.infeccion[property]['positivo'] = positivo_realizado[0];
+                            $scope.$apply();
+                            expect($scope.infeccion[property]['realizado']).toBe(positivo_realizado[1]);
+                        });
                     });
                 });
             });
