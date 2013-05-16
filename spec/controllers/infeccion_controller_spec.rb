@@ -58,20 +58,24 @@ describe InfeccionController do
       end
     end
 
-    # it 'should update ascitis exclusive properties' do
-    #   epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, :pos)))
-    #   ascitis_params = { gasa: true, proteinas_totales: 17.2, 
-    #                       recuento_de_neutrofilos: 67000, citologico: 'algo para citologico', 
-    #                       positivo: false, realizado: true }
-    #   put :update, { epicrisi_id: epi.id, ascitis: ascitis_params }
-    #   body = JSON.parse(response.body)
-    #   new_params = body['infeccion']['ascitis'].delete_if {|key| ['created_at', 'id', 'updated_at', 'infeccion_id'].include? key  }
-    #   ascitis = Ascitis.new(new_params)
-    #   ascitis.gasa.should = 17.2
-    #   ascitis.proteinas_totales.should = 17.2
-    #   ascitis.recuento_de_neutrofilos.should = 17.2
-    #   ascitis.citologico.should = 17.2
-    # end
+    it 'should update ascitis exclusive properties' do
+      epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, :pos)))
+      ascitis_params = { gasa: true, proteinas_totales: 17.2, 
+                          recuento_de_neutrofilos: 67000, citologico: 'algo para citologico', 
+                          positivo: false, realizado: true }
+      put :update, { epicrisi_id: epi.id, ascitis: ascitis_params }
+      body = JSON.parse(response.body)
+      ascitisDB = Ascitis.find(body['infeccion']['ascitis']['id'])
+      new_params = body['infeccion']['ascitis'].delete_if {|key| ['created_at', 'id', 'updated_at', 'infeccion_id'].include? key  }
+      ascitisResponse = Ascitis.new(new_params)
+      
+      [ascitisResponse, ascitisDB].each do |ascitis|
+        ascitis.gasa.should eq true
+        ascitis.proteinas_totales.should == 17.2
+        ascitis.recuento_de_neutrofilos.should == 67000
+        ascitis.citologico.should == "algo para citologico"
+      end
+    end
 
   end
 
