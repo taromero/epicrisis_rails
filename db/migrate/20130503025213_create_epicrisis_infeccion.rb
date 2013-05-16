@@ -26,6 +26,12 @@ class CreateEpicrisisInfeccion < ActiveRecord::Migration
       t.boolean :positivo
       t.integer :infeccion_id
 
+      #atributos espeficicos de ascitis
+      t.boolean :gasa
+      t.float :proteinas_totales
+      t.integer :recuento_de_neutrofilos
+      t.string :citologico
+
       t.timestamps
     end
   end

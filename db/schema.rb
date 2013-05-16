@@ -18,8 +18,12 @@ ActiveRecord::Schema.define(:version => 20130503025213) do
     t.string   "type"
     t.boolean  "positivo"
     t.integer  "infeccion_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.boolean  "gasa"
+    t.float    "proteinas_totales"
+    t.integer  "recuento_de_neutrofilos"
+    t.string   "citologico"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "epicrisis", :force => true do |t|
