@@ -37,6 +37,7 @@ group :test, :development do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'poltergeist', "~>1.2.0"
+  gem 'faye-websocket', "0.4.7"
   gem 'spork-rails'
 end
 

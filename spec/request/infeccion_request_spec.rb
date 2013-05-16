@@ -22,20 +22,20 @@ end
 
 describe "Infeccion" do
 
-  context "show", :js => true do
-    before(:each) do
-      @epicrisis = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis)))
-      @infeccion = @epicrisis.infeccion
-      visit "/#/epicrisis/" + @epicrisis.id.to_s
-    end
+  # context "show", :js => true do
+  #   before(:each) do
+  #     @epicrisis = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis)))
+  #     @infeccion = @epicrisis.infeccion
+  #     visit "/#/epicrisis/" + @epicrisis.id.to_s
+  #   end
 
-    it "should display all the project's resources names" do
-      @infeccion.nombre.should_not eq nil
-      page.should have_content(@infeccion.nombre)
-    end
-    context "update", :js => true do
+  #   it "should display all the project's resources names" do
+  #     @infeccion.nombre.should_not eq nil
+  #     page.should have_content(@infeccion.nombre)
+  #   end
+  #   context "update", :js => true do
 
-    end
-  end
+  #   end
+  # end
 
 end
