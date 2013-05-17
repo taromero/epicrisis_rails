@@ -9,7 +9,7 @@ epicrisis.directive('infeccionDetail', function() {
     controller: function($scope, restService) {
     	var standardCultivos;
     	$scope.$watch('epicrisis', function() {
-		    $scope.infeccion = $scope.epicrisis.infeccion;
+		    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
 		    standardCultivos = [$scope.infeccion.ascitis,
 								$scope.infeccion.hemocultivos,
 								$scope.infeccion.urocultivo];
