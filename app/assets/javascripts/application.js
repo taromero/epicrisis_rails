@@ -13,7 +13,7 @@ epicrisis.config(function($routeProvider) {
     $routeProvider.
       // when('/epicrisis', {controller:'EpicrisisListCtrl', templateUrl:'/partials/epicrisis-list.html'}).
       when('/epicrisis/:id', { template: '<epicrisis-detail></epicrisis-detail>' }).
-      otherwise({redirectTo: '/epicrisis'})
+      otherwise({redirectTo: '/epicrisis/2'})
   });
 
 epicrisis.service('restService', ['$resource', function($resource) {

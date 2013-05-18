@@ -4,6 +4,7 @@ describe('Infeccion', function() {
         var restService;
         beforeEach(function() {
             template = angular.element('<infeccion-detail></infeccion-detail>');
+            // document.append(template);
             module('epicrisis');
             module('epicrisisMocks');
             inject(function($injector, $rootScope, $compile, $templateCache) {
@@ -22,6 +23,7 @@ describe('Infeccion', function() {
 
         it("should update realizado's checkbox when infeccion is updated", function() {
             $scope.infeccion['ascitis']['positivo'] = null;
+            debugger;
             $scope.update();
             expect($scope.infeccion['ascitis']['realizado']).toBe(false);
             $scope.infeccion['ascitis']['positivo'] = false;
