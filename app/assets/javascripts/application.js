@@ -11,7 +11,6 @@ var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource', 'ui.dire
 
 epicrisis.config(function($routeProvider) {
     $routeProvider.
-      // when('/epicrisis', {controller:'EpicrisisListCtrl', templateUrl:'/partials/epicrisis-list.html'}).
       when('/epicrisis/:id', { template: '<epicrisis-detail></epicrisis-detail>' }).
       otherwise({redirectTo: '/epicrisis/2'})
   });

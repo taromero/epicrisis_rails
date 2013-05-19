@@ -12,7 +12,7 @@ describe('PhoneCat App', function() {
       // expect(element('tr').count()).toBe(5);
       expect(browser().location().url()).toBe("/epicrisis/2");
       // browser().navigateTo('#/epicrisis');
-      pause();
+      // pause();
       expect(repeater('table').count()).toEqual(1);
       expect(element('tr', 'algo').count()).toBe(3);
  
