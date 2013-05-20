@@ -7,15 +7,14 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'spec/angular/libs/mocks.js',
+  'app/assets/javascripts/underscore-min.js',
   'app/assets/javascripts/application.js',
-  'spec/angular/e2e/sample_e2espec.js'
+  'spec/angular/e2e/mocks/e2e_mocks.js',
+  'spec/angular/e2e/infeccion_e2e_spec.js'
 ];
 
 proxies = {
-  // '/': 'http://localhost:3000/',
   '/' : 'http://localhost:3502/'
-  // '/public/index.e2e.html' : 'http://localhost:3502/'
 };
 
 // list of files to exclude
@@ -27,6 +26,7 @@ reporters = ['progress'];
 
 autoWatch = true;
 browsers = ['Chrome'];
+// browsers = ['PhantomJS'];
 
 // web server port
 // port = 3000;
