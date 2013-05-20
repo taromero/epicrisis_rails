@@ -33,6 +33,14 @@ describe "Infeccion" do
       @infeccion.nombre.should_not eq nil
       find('input.nombre').value.should eq @infeccion.nombre
     end
+
+    it "should update ascitis exclusive properties" do
+      find(:css, 'input[ng-model="infeccion.ascitis.gasa"]').set(true)
+      # fill_in 'input[ng-model="infeccion.ascitis.gasa"]', with: true
+      # find('input[ng-model="infeccion.ascitis.proteinas_totales"]').value(2.5)
+      find('#guardar').click()
+      Ascitis.first.gasa.should eq true
+    end
     # context "update", :js => true do
 
     # end

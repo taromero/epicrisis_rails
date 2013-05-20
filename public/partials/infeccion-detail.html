@@ -33,7 +33,12 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="ascitis" ng-show="infeccion.ascitis.realizado"></div>
+			<div class="ascitis" ng-show="infeccion.ascitis.realizado">
+				Gasa: <input type="checkbox" ng-model="infeccion.ascitis.gasa" id="gasa"/>
+				Proteinas totales: <input type="number" ng-model="infeccion.ascitis.proteinas_totales"/>
+				Recuento de neutrofilos: <input type="number" ng-model="infeccion.ascitis.recuento_de_neutrofilos"/>
+				Citologico: <input type="number" ng-model="infeccion.ascitis.citologico"/>
+			</div>
 			<otros-cultivos></otros-cultivos>
 			<div>
 				Shock Septico
@@ -44,7 +49,7 @@
 				<input type="checkbox" ng-model="infeccion.curacion"/>
 			</div>
 			<div>
-				<a ng-click="update()" class="btn btn-primary">Guardar</a>
+				<a ng-click="update()" class="btn btn-primary" id="guardar">Guardar</a>
 			</div>
 		</div>
 	</div>

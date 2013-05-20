@@ -23,7 +23,6 @@ describe('Infeccion', function() {
 
         it("should update realizado's checkbox when infeccion is updated", function() {
             $scope.infeccion['ascitis']['positivo'] = null;
-            debugger;
             $scope.update();
             expect($scope.infeccion['ascitis']['realizado']).toBe(false);
             $scope.infeccion['ascitis']['positivo'] = false;
@@ -93,12 +92,12 @@ describe('Infeccion', function() {
 
             describe('ascitis', function() {
                 it('should show ascitis form if realizado is true', function() {
-                    $scope.infeccion.ascitis.realizado = true;
-                    $scope.$apply();
-                    expect(template.find('div.ascitis').css('display')).toBe('');
                     $scope.infeccion.ascitis.realizado = false;
                     $scope.$apply();
                     expect(template.find('div.ascitis').css('display')).toBe('none');
+                    $scope.infeccion.ascitis.realizado = true;
+                    $scope.$apply();
+                    expect(template.find('div.ascitis').css('display')).toBe('');
                 })
             });
         })

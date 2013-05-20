@@ -20,7 +20,7 @@ files = [
   'spec/angular/libs/jasmine-jquery-1.3.1.js',
   'spec/angular/libs/mocks.js',
   'spec/angular/helpers/templatesLoader.js',
-  'spec/**/*_spec.js'
+  'spec/angular/unit/*_spec.js'
 ];
 
 proxies = {
@@ -67,8 +67,8 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
-// browsers = ['PhantomJS'];
+// browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it

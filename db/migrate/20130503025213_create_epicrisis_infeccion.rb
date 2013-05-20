@@ -12,7 +12,6 @@ class CreateEpicrisisInfeccion < ActiveRecord::Migration
     create_table :infeccion do |t|
     	t.string :nombre
     	t.string :antibiotico_usado
-    	t.string :antibiotico_usado
     	t.boolean :shock_septico
     	t.boolean :curacion
     	t.integer :epicrisis_id

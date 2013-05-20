@@ -7,13 +7,17 @@ epicrisis.directive('infeccionDetail', function() {
     transclude: true,
     scope: false,
     controller: function($scope, restService) {
-    	var standardCultivos;
+    	var standardCultivos = [ { realizado:null, positivo:null} ]
     	$scope.$watch('epicrisis', function() {
-		    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
-		    standardCultivos = [$scope.infeccion.ascitis,
-								$scope.infeccion.hemocultivos,
-								$scope.infeccion.urocultivo];
-		    setRealizado()
+    		if($scope.epicrisis) {
+			    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
+			    if($scope.infeccion.ascitis && $scope.infeccion.hemocultivos && $scope.infeccion.urocultivo) {
+				    standardCultivos = [$scope.infeccion.ascitis,
+										$scope.infeccion.hemocultivos,
+										$scope.infeccion.urocultivo];
+				}
+			    setRealizado()
+			}
 		});
 
 		$scope.$watch(function() { 
@@ -31,6 +35,7 @@ epicrisis.directive('infeccionDetail', function() {
 			    }
 			});
 		}, true);
+
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;
