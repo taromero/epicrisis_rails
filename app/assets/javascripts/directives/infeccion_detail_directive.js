@@ -7,34 +7,29 @@ epicrisis.directive('infeccionDetail', function() {
     transclude: true,
     scope: false,
     controller: function($scope, restService) {
-    	var standardCultivos = [ { realizado:null, positivo:null} ]
+    	$scope.infeccion = { ascitis: null, hemocultivos: null, urocultivo: null }
     	$scope.$watch('epicrisis', function() {
     		if($scope.epicrisis) {
 			    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
-			    standardCultivos = []
-			    //Evita problemas de null pointers cuando alguno de los cultivos no esta inicializado
-			    _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).each(function(c) {
-			    	if(c){
-			    		standardCultivos.push(c);
-			    	}
-			    });
 			    setRealizado()
 			}
 		});
 
 		$scope.$watch(function() { 
-			return _(standardCultivos).map(function(cultivo) { return cultivo.positivo });
+			return _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).map(function(cultivo) { return cultivo.positivo });
 		}, function() {
 		    setRealizado();
 		}, true);
 
 		$scope.$watch(function() { 
-			return _(standardCultivos).map(function(cultivo) { return cultivo.realizado });
+			return _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).map(function(cultivo) { return cultivo.realizado });
 		}, function() {
-			_(standardCultivos).each(function(cultivo) {
-				if(cultivo.positivo == true && cultivo.realizado == false){
-		    		cultivo.positivo = null;
-			    }
+			_([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).each(function(cultivo) {
+				if(cultivo) {
+					if(cultivo.positivo == true && cultivo.realizado == false){
+			    		cultivo.positivo = null;
+				    }
+				}
 			});
 		}, true);
 
@@ -55,8 +50,10 @@ epicrisis.directive('infeccionDetail', function() {
 		}
 
 		function setRealizado() {
-			_(standardCultivos).each(function(cultivo) {
-				cultivo.realizado = cultivo.positivo != null;
+			_([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).each(function(cultivo) {
+				if(cultivo != null) {
+					cultivo.realizado = cultivo.positivo != null;
+				}
 			});
 		}
 	},
