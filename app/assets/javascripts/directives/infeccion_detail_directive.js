@@ -11,11 +11,13 @@ epicrisis.directive('infeccionDetail', function() {
     	$scope.$watch('epicrisis', function() {
     		if($scope.epicrisis) {
 			    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
-			    if($scope.infeccion.ascitis && $scope.infeccion.hemocultivos && $scope.infeccion.urocultivo) {
-				    standardCultivos = [$scope.infeccion.ascitis,
-										$scope.infeccion.hemocultivos,
-										$scope.infeccion.urocultivo];
-				}
+			    standardCultivos = []
+			    //Evita problemas de null pointers cuando alguno de los cultivos no esta inicializado
+			    _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).each(function(c) {
+			    	if(c){
+			    		standardCultivos.push(c);
+			    	}
+			    });
 			    setRealizado()
 			}
 		});

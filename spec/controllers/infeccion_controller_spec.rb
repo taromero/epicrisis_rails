@@ -60,6 +60,7 @@ describe InfeccionController do
 
     it 'should update ascitis exclusive properties' do
       epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, :pos)))
+      epi.infeccion.ascitis.gasa.should_not eq true
       ascitis_params = { gasa: true, proteinas_totales: 17.2, 
                           recuento_de_neutrofilos: 67000, citologico: 'algo para citologico', 
                           positivo: false, realizado: true }

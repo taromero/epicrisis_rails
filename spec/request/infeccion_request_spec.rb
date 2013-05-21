@@ -35,11 +35,20 @@ describe "Infeccion" do
     end
 
     it "should update ascitis exclusive properties" do
-      find(:css, 'input[ng-model="infeccion.ascitis.gasa"]').set(true)
-      # fill_in 'input[ng-model="infeccion.ascitis.gasa"]', with: true
-      # find('input[ng-model="infeccion.ascitis.proteinas_totales"]').value(2.5)
+      find('.ascitis .realizado').value.should eq 'on'
+
+      find('#gasa').set(true)
+      find('#proteinas').set(100.3)
+      find('#recuento_de_neutrofilos').set(50000)
+      find('#citologico').set('unCitologico')
       find('#guardar').click()
-      Ascitis.first.gasa.should eq true
+
+      sleep 0.5 #TODO hacer que no dependa de esto
+      ascitis = Ascitis.first
+      ascitis.proteinas_totales.should eq 100.3
+      ascitis.gasa.should eq true
+      ascitis.recuento_de_neutrofilos.should eq 50000
+      ascitis.citologico.should eq 'unCitologico'
     end
     # context "update", :js => true do
 
