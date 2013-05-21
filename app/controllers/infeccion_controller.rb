@@ -19,7 +19,7 @@ class InfeccionController < ApplicationController
 		ascitisNonMassUpdatableParams = ['created_at', 'id', 'updated_at', 'infeccion_id', 'realizado', 'positivo']
 		updatable_ascitis_params = params_ascitis.delete_if { |key| ascitisNonMassUpdatableParams.include? key }
 		infeccion.ascitis.update_attributes(params_ascitis)
-		infeccion.save!
+		# infeccion.save!
 		epi.save!
 		render json: epi.infeccion
 	end

@@ -43,9 +43,10 @@ epicrisis.directive('infeccionDetail', function() {
 				setRealizado()
 				$scope.httpStatus = 'success'
 				$scope.httpMessage = 'actualizado correctamente'
-			}, function(data) {
+			}, function(resp) {
+				debugger;
 				$scope.httpStatus = 'error'
-				$scope.httpMessage = data.errors[0]
+				$scope.httpMessage = resp.data.errors[0]
 			});
 		}
 

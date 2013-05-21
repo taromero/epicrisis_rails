@@ -2,9 +2,28 @@ require 'spec_helper'
 
 describe Ascitis do
 
-	it 'should validate when exclusive attributes are setted' do
-		Ascitis.new(gasa: false, proteinas_totales: 1.3,
-		recuento_de_neutrofilos: 5000, citologico: 'algo').valid?.should eq true
+	context 'is positive' do
+		it 'should validate when exclusive attributes are setted' do
+			Ascitis.new(gasa: false, proteinas_totales: 1.3,
+							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: true).valid?.should eq true
+		end
+	end
+
+	context 'is negative' do
+		it 'should validate when exclusive attributes are setted' do
+			Ascitis.new(gasa: false, proteinas_totales: 1.3,
+							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: false).valid?.should eq true
+		end
+	end
+
+	context 'has not been tested' do
+		it 'should not validate when properties are setted' do
+			ascitis = Ascitis.new(gasa: false, proteinas_totales: 1.3,
+						recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: nil)
+			ascitis.valid?.should eq false
+			ascitis.errors[:atributos_erroneos].first.should eq 'La ascitis no puede tener atributos si no dio positiva'
+
+		end
 	end
 
 	describe 'otros tipos de cultivos' do

@@ -11,7 +11,7 @@ epicrisisMocks.service('restService', ['$resource', function($resource) {
     infeccion: { get: function(params, callback) { callback({ infeccion: infeccion }) }, 
     				update: function(infeccion, success, fail) { 
                       if(infeccion.id == 0) {
-                        fail({errors: ['Hubo un error y no se pudo actulizar, recargue la pagina y si el error sigue llame a Tomas']})
+                        fail({ data: {errors: ['Hubo un error y no se pudo actulizar, recargue la pagina y si el error sigue llame a Tomas']}})
                       } else {
                         success({ infeccion: infeccion })
                       }

@@ -63,7 +63,7 @@ describe InfeccionController do
       epi.infeccion.ascitis.gasa.should_not eq true
       ascitis_params = { gasa: true, proteinas_totales: 17.2, 
                           recuento_de_neutrofilos: 67000, citologico: 'algo para citologico', 
-                          positivo: false, realizado: true }
+                          positivo: true, realizado: true }
       put :update, { epicrisi_id: epi.id, ascitis: ascitis_params }
       body = JSON.parse(response.body)
       ascitisDB = Ascitis.find(body['infeccion']['ascitis']['id'])
