@@ -53,4 +53,9 @@
 			</div>
 		</div>
 	</div>
+	<table class="table status" ng-show="httpStatus != null">
+		<tr ng-class="httpStatus">
+			<td>{{ httpMessage }}</td>
+		</tr>
+	</table>
 </div>

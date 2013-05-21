@@ -41,9 +41,16 @@ epicrisis.directive('infeccionDetail', function() {
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;
+			$scope.httpStatus = 'warning'
+			$scope.httpMessage = 'actualizando, espere por favor'
 			restService.infeccion.update($scope.infeccion, function(data) {
 				$scope.infeccion = data.infeccion;
 				setRealizado()
+				$scope.httpStatus = 'success'
+				$scope.httpMessage = 'actualizado correctamente'
+			}, function(data) {
+				$scope.httpStatus = 'error'
+				$scope.httpMessage = data.errors[0]
 			});
 		}
 

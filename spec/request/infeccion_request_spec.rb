@@ -43,7 +43,9 @@ describe "Infeccion" do
       find('#citologico').set('unCitologico')
       find('#guardar').click()
 
-      sleep 0.5 #TODO hacer que no dependa de esto
+      #esto hace que espere hasta la respuesta de que se guardo, sino el test falla porque la asercion se hace antes de que el controller termine de actualizar
+      page.should have_css('#infeccion .status .success')
+
       ascitis = Ascitis.first
       ascitis.proteinas_totales.should eq 100.3
       ascitis.gasa.should eq true

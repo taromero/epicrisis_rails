@@ -6,12 +6,21 @@ epicrisisMocks.service('restService', ['$resource', function($resource) {
                     urocultivo: { positivo: false }, ascitis: { positivo: false }, cultivos: [] };
   var epicrisis = { id:'1', infeccion: infeccion };
 
-  infeccion.$update = function(success, fail) { this.id == 0 ? fail({data: {errors: []}}) : success() ; };
+  // infeccion.$update = function(success, fail) {
+  //   debugger;
+  //   this.id == 0 ? fail({data: {errors: []}}) : success() ; 
+  // };
 
   return { 
     epicrisis: { get: function(params, callback) { callback({ epicrisis: epicrisis }) } } ,
     infeccion: { get: function(params, callback) { callback({ infeccion: infeccion }) }, 
-    				update: function(infeccion, callback) { callback({ infeccion: infeccion }) } } ,
+    				update: function(infeccion, success, fail) { 
+                      if(infeccion.id == 0) {
+                        fail({errors: ['Hubo un error y no se pudo actulizar, recargue la pagina y si el error sigue llame a Tomas']})
+                      } else {
+                        success(infeccion)
+                      }
+              } } ,
     cultivos: { save: function(cultivo) { return cultivo; } },
     mockEpicrisis: epicrisis
   }
