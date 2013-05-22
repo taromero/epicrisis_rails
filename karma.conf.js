@@ -20,6 +20,7 @@ files = [
   'spec/angular/libs/jasmine-jquery-1.3.1.js',
   'spec/angular/libs/mocks.js',
   'spec/angular/helpers/templatesLoader.js',
+  'spec/angular/helpers/infeccion_spec_config.js',
   'spec/angular/unit/*_spec.js'
 ];
 
