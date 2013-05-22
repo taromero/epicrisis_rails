@@ -21,6 +21,7 @@ files = [
   'spec/angular/libs/mocks.js',
   'spec/angular/helpers/templatesLoader.js',
   'spec/angular/helpers/infeccion_spec_config.js',
+  'spec/angular/helpers/jasmine_enhancer.js',
   'spec/angular/unit/*_spec.js'
 ];
 
@@ -68,8 +69,8 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
-// browsers = ['PhantomJS'];
+// browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it

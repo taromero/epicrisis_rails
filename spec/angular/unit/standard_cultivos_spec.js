@@ -5,33 +5,34 @@ describe('Cultivos estandar de una infeccion (Ascitis, Hemocultivos, Urocultivo)
 
     describe('realizado', function() {
         it("should watch positivo's value and update accordingly", function() {
-            _(['ascitis', 'hemocultivos', 'urocultivo']).each(function(property) {
-                _([
-                    [null, false],
-                    [false, true],
-                    [true, true],
-                    [null, false]
-                ]).each(function(positivo_realizado) {
-                    $scope.infeccion[property]['positivo'] = positivo_realizado[0];
-                    $scope.$apply();
-                    expect($scope.infeccion[property]['realizado']).toBe(positivo_realizado[1]);
-                    expect(template.find('.' + property + ' .realizado').is(':checked')).toBe(positivo_realizado[1]);
-                });
+            using('all posible standard cultivos', ['ascitis', 'hemocultivos', 'urocultivo'], function(cultivo) {
+                using("all posible combinations of positivo and realizado", 
+                    [
+                        [null, false],
+                        [false, true],
+                        [true, true],
+                        [null, false]
+                    ], function(positivo, realizado) {
+                        $scope.infeccion[cultivo]['positivo'] = positivo;
+                        $scope.$apply();
+                        expect($scope.infeccion[cultivo]['realizado']).toBe(realizado);
+                        expect(template.find('.' + cultivo + ' .realizado').is(':checked')).toBe(realizado);
+                    }
+                );
             });
         });
     });
 
     describe('positivo', function() {
         it("should watch realizado's value and update accordingly", function() {
-            _(['ascitis', 'hemocultivos', 'urocultivo']).each(function(property) {
-                $scope.infeccion[property]['positivo'] = true;
+            using("all posible standard cultivos", ['ascitis', 'hemocultivos', 'urocultivo'], function(cultivo){
+                $scope.infeccion[cultivo]['positivo'] = true;
                 $scope.$apply()
-                $scope.infeccion[property]['realizado'] = false;
+                $scope.infeccion[cultivo]['realizado'] = false;
                 $scope.$apply()
-                expect($scope.infeccion[property]['positivo']).toBe(null);
+                expect($scope.infeccion[cultivo]['positivo']).toBe(null);
             });
         })
     });
-
 
 });
