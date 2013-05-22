@@ -2,6 +2,7 @@ class CultivoGenerico < ActiveRecord::Base
 	attr_accessible :nombre, :positivo, :infeccion
 	belongs_to :infeccion, :autosave => true
 
+	validates :nombre, :presence => true
 	validate :no_ascitis_specific_attrs, unless: lambda { |e| e.type === "Ascitis" }
 
   	def no_ascitis_specific_attrs
