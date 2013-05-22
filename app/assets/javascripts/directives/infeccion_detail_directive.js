@@ -54,7 +54,6 @@ epicrisis.directive('infeccionDetail', function() {
 				$scope.httpStatus = 'success'
 				$scope.httpMessage = 'actualizado correctamente'
 			}, function(resp) {
-				debugger;
 				$scope.httpStatus = 'error'
 				$scope.httpMessage = resp.data.errors[0]
 			});
@@ -72,26 +71,4 @@ epicrisis.directive('infeccionDetail', function() {
     replace: true
   }
 
-});
-
-epicrisis.directive('otrosCultivos', function() {
-	return {
-	    restrict: 'E',
-	    transclude: true,
-	    scope: false,
-	    controller: function($scope, restService) {
-			$scope.nuevoCultivo = {};
-			
-			$scope.newCultivo = function() {
-				$scope.newFormEnabled = true;
-			}
-
-			$scope.addCultivo = function() {
-		    	$scope.nuevoCultivo.epicrisis = $scope.epicrisis;
-				$scope.infeccion.cultivos.push(restService.cultivos.save($scope.nuevoCultivo));
-			}
-		},
-	    templateUrl: 'partials/otros-cultivos.html',
-	    replace: true
-	}
 });

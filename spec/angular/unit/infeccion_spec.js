@@ -8,7 +8,6 @@ describe('Infeccion', function() {
         it("should show a success msg en case of successful update", function() {
             expect(template.find('.status tr').hasClass('success')).toBe(false);
             template.find('#guardar').click();
-            $(document).find('body').append(template)
             expect(template.find('.status tr').hasClass('success')).toBe(true);
             expect($scope.httpMessage).toEqual('actualizado correctamente')
         });
