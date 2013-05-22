@@ -50,6 +50,8 @@ FactoryGirl.define do
     shock_septico false
     curacion true
     ascitis
+    urocultivo
+    hemocultivos
   end
 
   factory :epicrisis do

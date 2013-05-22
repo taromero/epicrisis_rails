@@ -8,31 +8,35 @@ epicrisis.directive('infeccionDetail', function() {
     scope: false,
     controller: function($scope, restService) {
     	$scope.infeccion = { ascitis: null, hemocultivos: null, urocultivo: null }
+    	var standardCultivos = []
     	$scope.$watch('epicrisis', function() {
     		if($scope.epicrisis) {
-			    $scope.infeccion = $scope.epicrisis != undefined ? $scope.epicrisis.infeccion : { };
+			    $scope.infeccion = $scope.epicrisis.infeccion;
 			    setRealizado()
+			    standardCultivos = [$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]
+			    addWatchers()
 			}
 		});
 
-		$scope.$watch(function() { 
-			return _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).map(function(cultivo) { return cultivo.positivo });
-		}, function() {
-		    setRealizado();
-		}, true);
+    	function addWatchers() {
+			$scope.$watch(function() { 
+				return _(standardCultivos).map(function(cultivo) { return cultivo.positivo });
+			}, function() {
+			    setRealizado();
+			}, true);
 
-		$scope.$watch(function() { 
-			return _([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).map(function(cultivo) { return cultivo.realizado });
-		}, function() {
-			_([$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]).each(function(cultivo) {
-				if(cultivo) {
-					if(cultivo.positivo == true && cultivo.realizado == false){
-			    		cultivo.positivo = null;
-				    }
-				}
-			});
-		}, true);
-
+			$scope.$watch(function() { 
+				return _(standardCultivos).map(function(cultivo) { return cultivo.realizado });
+			}, function() {
+				_(standardCultivos).each(function(cultivo) {
+					if(cultivo) {
+						if(cultivo.positivo == true && cultivo.realizado == false){
+				    		cultivo.positivo = null;
+					    }
+					}
+				});
+			}, true);
+		}
 
 		$scope.update = function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;

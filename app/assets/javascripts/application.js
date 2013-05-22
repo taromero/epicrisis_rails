@@ -10,18 +10,7 @@
 var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource', 'ui.directives']);
 
 epicrisis.config(function($routeProvider) {
-    $routeProvider.
-      when('/epicrisis/:id', { template: '<epicrisis-detail></epicrisis-detail>' }).
-      otherwise({redirectTo: '/epicrisis/2'})
-  });
-
-epicrisis.service('restService', ['$resource', function($resource) {
-
-  return {
-    epicrisis: $resource('/epicrisis/:id', { id: '@id' }),
-    cultivos: $resource('/epicrisis/:epicrisisId/infeccion/cultivos/:cultivoId', 
-    						{ epicrisisId: '@epicrisis.id', cultivoId: '@id' }),
-    infeccion: $resource('/epicrisis/:epicrisisId/infeccion', { epicrisisId: '@epicrisisId' }, { update: { method: 'PUT'} })
-  }
-
-}]);
+  $routeProvider.
+    when('/epicrisis/:id', { template: '<epicrisis-detail></epicrisis-detail>' }).
+    otherwise({redirectTo: '/epicrisis/2'})
+});
