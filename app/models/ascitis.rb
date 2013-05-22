@@ -6,7 +6,7 @@ class Ascitis < CultivoGenerico
   	def no_attrs_if_positivo_false
   		if positivo == nil
 			if not (gasa.nil? && proteinas_totales.nil? && recuento_de_neutrofilos.nil? && citologico.nil?)
-				self.errors[:atributos_erroneos] = 'La ascitis no puede tener atributos si no dio positiva'
+				self.errors[:atributos_erroneos] = 'La ascitis no puede tener atributos si no fue realizada'
 			end
 		end
   	end

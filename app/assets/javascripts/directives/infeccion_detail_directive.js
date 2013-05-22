@@ -38,6 +38,12 @@ epicrisis.directive('infeccionDetail', function() {
 			$scope.infeccion.epicrisisId = $scope.epicrisisId;
 			$scope.httpStatus = 'warning'
 			$scope.httpMessage = 'actualizando, espere por favor'
+			if($scope.infeccion.ascitis) {
+				if($scope.infeccion.ascitis.realizado == false) {
+					$scope.infeccion.ascitis.gasa = null; $scope.infeccion.ascitis.proteinas_totales = null;
+					$scope.infeccion.ascitis.recuento_de_neutrofilos = null; $scope.infeccion.ascitis.citologico = null;
+				}
+			}
 			restService.infeccion.update($scope.infeccion, function(data) {
 				$scope.infeccion = data.infeccion;
 				setRealizado()
