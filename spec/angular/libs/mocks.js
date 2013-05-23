@@ -16,7 +16,21 @@ epicrisisMocks.service('restService', ['$resource', function($resource) {
                         success({ infeccion: infeccion })
                       }
               } } ,
-    cultivos: { save: function(cultivo) { return cultivo; } },
+    cultivos: { save: function(cultivo, callback, error) {
+                        if(cultivo.nombre) {
+                          callback(cultivo);
+                        } else {
+                          error({data: {errors: ['ocurrio un error creando el cultivo'] }})
+                        }
+                      },
+                remove: function(cultivo, callback, error) { 
+                          if(cultivo.nombre != 'nombreANoBorrar') {
+                            callback(cultivo)
+                          } else {
+                            error({ data: { errors: ['No es pudo borrar']} })
+                          }
+                        }
+               },
     mockEpicrisis: epicrisis
   }
 

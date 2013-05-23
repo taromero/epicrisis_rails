@@ -3,11 +3,13 @@
 		<thead>
 			<th>Agregar <a class="btn" id="newCultivo" ng-click="newCultivo()"><i class="icon-plus"></i></a></th>
 			<th>Resultado</th>
+			<th></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="cultivo in infeccion.cultivos" class="otrosCultivos">
 				<td><input type="text" ng-model="cultivo.nombre" style="width:90%"></td>
 				<td><input type="checkbox" ng-model="cultivo.positivo"></td>
+				<td><button type="button" class="close deleteCultivo" ng-click="delete(cultivo)">×</button></td>
 			</tr>
 			<tr class="newForm" ng-show="newFormEnabled">
 				<td>
@@ -16,9 +18,15 @@
 				<td>
 					<input type="checkbox" ng-model="nuevoCultivo.positivo">
 				</td>
-				<td>
-					<a ng-click="addCultivo()" id="addCultivo" class="btn btn-primary" id="createCultivo">Agregar Cultivo</a>
-				</td>
+				<td><a ng-click="addCultivo()" id="addCultivo" class="btn btn-primary">Agregar Cultivo</a></td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<div class="alert alert-{{ nuevoCultivo.httpResponse }}" ng-show="nuevoCultivo.httpResponse != null">
+		              	<button type="button" class="close" data-dismiss="alert">×</button>
+		              	<strong>Atencion!</strong> {{ nuevoCultivo.httpMessage }}
+		            </div>
+	            </td>
 			</tr>
 		</tbody>
 	</table>

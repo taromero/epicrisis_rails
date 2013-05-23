@@ -5,14 +5,14 @@ describe Ascitis do
 	context 'is positive' do
 		it 'should validate when exclusive attributes are setted' do
 			Ascitis.new(gasa: false, proteinas_totales: 1.3,
-							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: true).valid?.should eq true
+							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: true, nombre: 'a').valid?.should eq true
 		end
 	end
 
 	context 'is negative' do
 		it 'should validate when exclusive attributes are setted' do
 			Ascitis.new(gasa: false, proteinas_totales: 1.3,
-							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: false).valid?.should eq true
+							recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: false, nombre: 'a').valid?.should eq true
 		end
 	end
 
@@ -21,7 +21,7 @@ describe Ascitis do
 			ascitis = Ascitis.new(gasa: false, proteinas_totales: 1.3,
 						recuento_de_neutrofilos: 5000, citologico: 'algo', positivo: nil)
 			ascitis.valid?.should eq false
-			ascitis.errors[:atributos_erroneos].first.should eq 'La ascitis no puede tener atributos si no dio positiva'
+			ascitis.errors[:atributos_erroneos].first.should eq 'La ascitis no puede tener atributos si no fue realizada'
 
 		end
 	end

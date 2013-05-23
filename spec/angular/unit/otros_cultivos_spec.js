@@ -12,6 +12,18 @@ describe('Otros cultivos de una infeccion', function() {
         expect($scope.nuevoCultivo.positivo).toBe(false)
     });
 
+    it('should not add a new cultivo when name is blank and should show an error', function() {
+        expect($scope.infeccion.cultivos.length).toBe(0)
+        template.find('#newCultivo').click();
+        $scope.nuevoCultivo.nombre = ''
+        $scope.nuevoCultivo.positivo = true
+        $scope.$apply();
+        template.find('#addCultivo').click();
+        expect($scope.infeccion.cultivos.length).toBe(0)
+        expect(template.find('.otrosCultivos tbody tr .alert-error').length).toBe(1); 
+    })
+
+
     describe('when a cultivo has already been added', function() {
         var nombreCultivo = 'nombreee';
         var positivoCultivo = true;
@@ -20,6 +32,7 @@ describe('Otros cultivos de una infeccion', function() {
             template.find('#newCultivo').click();
             $scope.nuevoCultivo.nombre = nombreCultivo
             $scope.nuevoCultivo.positivo = positivoCultivo
+            $scope.$apply();
             template.find('#addCultivo').click();
         });
 
@@ -30,6 +43,16 @@ describe('Otros cultivos de una infeccion', function() {
             expect(template.find('.otrosCultivos tbody tr.otrosCultivos input[type=text]').val()).toBe(nombreCultivo)
             expect(template.find('.otrosCultivos tbody tr.otrosCultivos input[type=checkbox]').val()).toBe(positivoCultivo ? 'on' : '')
             expect(template.find('.otrosCultivos tbody tr.otrosCultivos').length).toBe(1); 
+            expect(template.find('.otrosCultivos tbody tr .alert-success').length).toBe(1); 
+        });
+
+        it('should delete a cultivo', function() {
+            expect($scope.infeccion.cultivos.length).toBe(1)
+            expect(template.find('.otrosCultivos tbody tr.otrosCultivos').length).toBe(1); 
+            template.find('.deleteCultivo')[0].click();
+            expect($scope.infeccion.cultivos.length).toBe(0)
+            expect(template.find('.otrosCultivos tbody tr.otrosCultivos').length).toBe(0); 
+            expect($scope.httpMessage).toEqual('cultivo ' + nombreCultivo + ' eliminado correctamente')
         });
 
         it('new form should be hidden again', function() {
