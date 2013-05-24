@@ -17,8 +17,8 @@ files = [
   'app/assets/javascripts/underscore-min.js',
   'app/assets/javascripts/directives/*.js',
   'app/assets/javascripts/**/*.js',
+  'spec/angular/mocks/mocks.js',
   'spec/angular/libs/jasmine-jquery-1.3.1.js',
-  'spec/angular/libs/mocks.js',
   'spec/angular/helpers/templatesLoader.js',
   'spec/angular/helpers/infeccion_spec_config.js',
   'spec/angular/helpers/jasmine_enhancer.js',
@@ -69,8 +69,8 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
-// browsers = ['PhantomJS'];
+// browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it

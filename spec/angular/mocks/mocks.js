@@ -1,14 +1,17 @@
-var epicrisisMocks = angular.module('epicrisisMocks', ['ngResource', 'ui.directives']);
 
-epicrisisMocks.service('restService', ['$resource', function($resource) {
+var infeccionMock = { id: '1', nombre: 'unNombreDeInfeccion', hemocultivos: { positivo: false },
+                  urocultivo: { positivo: false }, ascitis: { positivo: false }, cultivos: [] };
+var epicrisisMock = { id:'1', infeccion: infeccionMock };
 
-  var infeccion = { id: '1', nombre: 'unNombreDeInfeccion', hemocultivos: { positivo: false },
-                    urocultivo: { positivo: false }, ascitis: { positivo: false }, cultivos: [] };
-  var epicrisis = { id:'1', infeccion: infeccion };
+epicrisis.service('restService', ['$resource', function($resource) {
+  infeccionMock = { id: '1', nombre: 'unNombreDeInfeccion', hemocultivos: { positivo: false },
+                  urocultivo: { positivo: false }, ascitis: { positivo: false }, cultivos: [] };
+
+  epicrisisMock = { id:'1', infeccion: infeccionMock };
 
   return { 
-    epicrisis: { get: function(params, callback) { callback({ epicrisis: epicrisis }) } } ,
-    infeccion: { get: function(params, callback) { callback({ infeccion: infeccion }) }, 
+    epicrisis: { get: function(params, callback) { callback({ epicrisis: epicrisisMock }) } } ,
+    infeccion: { get: function(params, callback) { callback({ infeccion: infeccionMock }) }, 
     				update: function(infeccion, success, fail) { 
                       if(infeccion.id == 0) {
                         fail({ data: {errors: ['Hubo un error y no se pudo actulizar, recargue la pagina y si el error sigue llame a Tomas']}})
@@ -31,7 +34,7 @@ epicrisisMocks.service('restService', ['$resource', function($resource) {
                           }
                         }
                },
-    mockEpicrisis: epicrisis
+    mockEpicrisis: epicrisisMock
   }
 
 }]);

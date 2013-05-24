@@ -1,14 +1,12 @@
 describe('Infeccion', function() {
  
-  var infeccion;
-
   beforeEach(function() {
     browser().navigateTo('/public/index.e2e.html');
     expect(browser().location().url()).toBe("/epicrisis/2");
   });
 
   it('should show infeccion information by default', function() {
-    expect(input('infeccion.nombre').val()).toEqual(mockInfeccion.nombre)
+    expect(input('infeccion.nombre').val()).toEqual(infeccionMock.nombre)
   });
 
   it("should update realizado's checkbox when positivo is updated", function() {

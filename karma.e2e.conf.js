@@ -9,7 +9,7 @@ files = [
   ANGULAR_SCENARIO_ADAPTER,
   'app/assets/javascripts/underscore-min.js',
   'app/assets/javascripts/application.js',
-  'spec/angular/e2e/mocks/e2e_mocks.js',
+  'spec/angular/mocks/mocks.js',
   'spec/angular/e2e/infeccion_e2e_spec.js'
 ];
 
