@@ -2,8 +2,8 @@
 	<table class="table table-striped table-bordered table-hover table-condensed otrosCultivos" style="table-layout:fixed">
 		<thead>
 			<th>Agregar <a class="btn" id="newCultivo" ng-click="newCultivo()"><i class="icon-plus"></i></a></th>
-			<th>Resultado</th>
-			<th></th>
+			<th style="width:30%">Resultado</th>
+			<th style="width:20%"></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="cultivo in infeccion.cultivos" class="otrosCultivos">
@@ -18,12 +18,12 @@
 				<td>
 					<input type="checkbox" ng-model="nuevoCultivo.positivo">
 				</td>
-				<td><a ng-click="addCultivo()" id="addCultivo" class="btn btn-primary">Agregar Cultivo</a></td>
+				<td><a ng-click="addCultivo()" id="addCultivo" class="btn btn-primary">OK</a></td>
 			</tr>
-			<tr>
+			<tr ng-show="nuevoCultivo.httpResponse != null">
 				<td colspan="3">
-					<div class="alert alert-{{ nuevoCultivo.httpResponse }}" ng-show="nuevoCultivo.httpResponse != null">
-		              	<button type="button" class="close" data-dismiss="alert">×</button>
+					<div class="alert alert-{{ nuevoCultivo.httpResponse }}">
+		              	<a type="button" class="close" ng-click="nuevoCultivo.httpResponse = null">×</a>
 		              	<strong>Atencion!</strong> {{ nuevoCultivo.httpMessage }}
 		            </div>
 	            </td>

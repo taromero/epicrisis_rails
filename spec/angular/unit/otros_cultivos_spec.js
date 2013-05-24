@@ -12,16 +12,33 @@ describe('Otros cultivos de una infeccion', function() {
         expect($scope.nuevoCultivo.positivo).toBe(false)
     });
 
-    it('should not add a new cultivo when name is blank and should show an error', function() {
-        expect($scope.infeccion.cultivos.length).toBe(0)
-        template.find('#newCultivo').click();
-        $scope.nuevoCultivo.nombre = ''
-        $scope.nuevoCultivo.positivo = true
-        $scope.$apply();
-        template.find('#addCultivo').click();
-        expect($scope.infeccion.cultivos.length).toBe(0)
-        expect(template.find('.otrosCultivos tbody tr .alert-error').length).toBe(1); 
-    })
+    describe('when adding a new cultivo when name is blank ', function() {
+        beforeEach(function() {
+            expect($scope.infeccion.cultivos.length).toBe(0)
+            template.find('#newCultivo').click();
+            $scope.nuevoCultivo.nombre = ''
+            $scope.nuevoCultivo.positivo = true
+            $scope.$apply();
+            template.find('#addCultivo').click();
+        });
+
+        it('should show an error', function() {
+            expect($scope.infeccion.cultivos.length).toBe(0)
+            expect(template.find('.otrosCultivos tbody tr .alert-error').length).toBe(1);
+        });
+
+        describe('if I close the alert and try to add the new cultivo again', function() {
+            beforeEach(function() {
+                template.find('.alert .close').click();
+            });
+            it('should shoe the alert again', function() {
+                expect(template.find('.otrosCultivos tbody tr .alert-error').length).toBe(0);
+                template.find('#addCultivo').click();
+                expect(template.find('.otrosCultivos tbody tr .alert-error').length).toBe(1);
+            });
+        });
+    });
+
 
 
     describe('when a cultivo has already been added', function() {
