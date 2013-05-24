@@ -3,11 +3,14 @@ epicrisis.directive('otrosCultivos', function() {
 	    restrict: 'E',
 	    transclude: true,
 	    scope: false,
-	    controller: function($scope, restService) {
+	    controller: function($scope, restService, $timeout) {
 			$scope.nuevoCultivo = { nombre: '', positivo: false };
 			
 			$scope.newCultivo = function() {
 				$scope.newFormEnabled = true;
+				$timeout(function() {
+					$('.newForm input[type="text"]').focus();
+				});
 			}
 
 			$scope.addCultivo = function() {
