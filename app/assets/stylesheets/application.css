@@ -8,6 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require jquery-ui/themes/ui-lightness/jquery-ui.min.css
+ *= require angular-ui/build/angular-ui.min.css
+ *= require bootstrap/docs/assets/css/bootstrap.css
  *= require_self
  *= require_tree .
  */

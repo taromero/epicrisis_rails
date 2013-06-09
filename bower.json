@@ -1,0 +1,12 @@
+{
+    "dependencies": {      
+    	"angular": "latest",
+    	"angular-resource": "latest",
+    	"angular-mocks": "latest",
+    	"angular-ui": "latest",
+    	"jquery": "1.9.1",
+    	"jquery-ui": "1.10.2",
+    	"bootstrap": "2.3.1",
+    	"underscore": "latest"
+    }    
+}

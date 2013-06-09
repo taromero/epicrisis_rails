@@ -7,7 +7,7 @@ basePath = '';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
-  'app/assets/javascripts/underscore-min.js',
+  'app/assets/components/underscore/underscore-min.js',
   'app/assets/javascripts/application.js',
   'spec/angular/mocks/mocks.js',
   'spec/angular/e2e/infeccion_e2e_spec.js'
