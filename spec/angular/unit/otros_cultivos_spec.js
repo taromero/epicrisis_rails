@@ -10,7 +10,7 @@ describe('Otros cultivos de una infeccion', function() {
             template.find('#newCultivo').click();
         });
 
-        it('should add a row on otrosCultivos table with the form when clicking on add', function() {
+        iit('should add a row on otrosCultivos table with the form when clicking on add', function() {
             expect($scope.newFormEnabled).toBe(true);
             expect(template.find('tr.newForm').css('display')).not.toBe('none');
             expect($scope.nuevoCultivo.nombre).toBe('');
