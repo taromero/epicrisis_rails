@@ -8,6 +8,7 @@
 // = require angular-resource/angular-resource.min.js
 // = require underscore/underscore-min.js
 // = require bootstrap/docs/assets/js/bootstrap.min.js
+// = require application.js
 //= require_tree .
 
 var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource', 'ui.directives']);

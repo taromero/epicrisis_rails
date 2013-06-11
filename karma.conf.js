@@ -17,15 +17,14 @@ files = [
   'app/assets/components/angular-mocks/angular-mocks.js',
   'app/assets/components/underscore/underscore-min.js',
   'app/assets/javascripts/application.js',
-  'app/assets/javascripts/directives/*.js',
   'app/assets/javascripts/directives/*.js.coffee',
   'app/assets/javascripts/**/*.js',
-  'spec/angular/mocks/mocks.js',
+  'spec/angular/mocks/mocks.js.coffee',
   'spec/angular/libs/jasmine-jquery-1.3.1.js',
-  'spec/angular/helpers/templatesLoader.js',
-  'spec/angular/helpers/infeccion_spec_config.js',
-  'spec/angular/helpers/jasmine_enhancer.js',
-  'spec/angular/unit/*_spec.js'
+  'spec/angular/helpers/templatesLoader.js.coffee',
+  'spec/angular/helpers/infeccion_spec_config.js.coffee',
+  'spec/angular/helpers/jasmine_enhancer.js.coffee',
+  'spec/angular/unit/*_spec.js.coffee'
 ];
 
 proxies = {
