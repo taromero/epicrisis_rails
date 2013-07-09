@@ -30,6 +30,24 @@ describe InfeccionController do
       Infeccion.first.nombre.should == infeccion_params[:nombre]
     end
 
+    [[:shock_septico, true],
+     [:curacion, false]
+    ].each do |prop, value|
+      it "should update infeccion #{prop}" do
+        infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :pos))
+        infeccion_params[:ascitis] = { realizado: true, positivo: true }
+        infeccion_params[prop] = value
+        Infeccion.find(@inf.id)[prop].should_not eq value
+        infeccion_params[:epicrisi_id] = @epi.id
+        put :update, infeccion_params
+        body = JSON.parse(response.body)
+
+        body['infeccion']['shock_septico'].should == value
+        Infeccion.first[prop].should_not == !value
+        Infeccion.first[prop].should == value
+      end
+    end
+
   end
 
   describe "Update ascitis/hemocultivos/urocultivo" do

@@ -10,6 +10,9 @@ class InfeccionController < ApplicationController
 		infeccion = epi.infeccion
 		infeccion = infeccion || Infeccion.new
 		infeccion.nombre = params[:nombre]
+		infeccion.shock_septico = params[:shock_septico]
+		infeccion.curacion = params[:curacion]
+
 		params_ascitis = params[:ascitis]
 		if params_ascitis[:realizado] == false and params_ascitis[:positivo] == false
 			infeccion.ascitis.positivo = nil
