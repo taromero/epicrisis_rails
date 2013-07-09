@@ -38,7 +38,11 @@ describe InfeccionController do
 
   describe "Update ascitis/hemocultivos/urocultivo" do
 
-    [:ascitis, :hemocultivos].each do |cultivo|
+    [
+      :ascitis,
+      :hemocultivos,
+      :urocultivo
+    ].each do |cultivo|
       [
         [nil, false, false, nil],
         [nil, true, true, true],

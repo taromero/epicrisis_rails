@@ -15,6 +15,7 @@ class InfeccionController < ApplicationController
 
 		update_ascitis(infeccion)
 		update_hemocultivos(infeccion)
+		update_urocultivo(infeccion)
 
 		infeccion.save!
 		epi.save!
@@ -22,6 +23,23 @@ class InfeccionController < ApplicationController
 	end
 
 	private
+
+	#para futuro refactor
+	def update_standard_cultivo(infeccion, cultivo)
+		params_cultivo = params[cultivo]
+		if params_cultivo
+			if params_cultivo[:realizado] == false and params_cultivo[:positivo] == false
+				infeccion[cultivo].positivo = nil
+			else
+				infeccion[cultivo].positivo = params_cultivo[:positivo]
+			end
+			if cultivo == :ascitis
+				ascitisNonMassUpdatableParams = ['created_at', 'id', 'updated_at', 'infeccion_id', 'realizado', 'positivo']
+				updatable_ascitis_params = params_cultivo.delete_if { |key| ascitisNonMassUpdatableParams.include? key }
+				infeccion.ascitis.update_attributes(params_cultivo)
+			end
+		end
+	end
 
 	def update_ascitis(infeccion)
 		params_ascitis = params[:ascitis]
@@ -44,6 +62,17 @@ class InfeccionController < ApplicationController
 				infeccion.hemocultivos.positivo = nil
 			else
 				infeccion.hemocultivos.positivo = params_hemocultivos[:positivo]
+			end
+		end
+	end
+
+	def update_urocultivo(infeccion)
+		params_urocultivo = params[:urocultivo]
+		if params_urocultivo
+			if params_urocultivo[:realizado] == false and params_urocultivo[:positivo] == false
+				infeccion.urocultivo.positivo = nil
+			else
+				infeccion.urocultivo.positivo = params_urocultivo[:positivo]
 			end
 		end
 	end
