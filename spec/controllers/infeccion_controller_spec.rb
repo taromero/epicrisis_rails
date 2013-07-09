@@ -16,34 +16,20 @@ describe InfeccionController do
       body['nombre'].should == @epi.infeccion.nombre
     end
 
-    it "should update infeccion" do
-      infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :pos))
-      infeccion_params[:ascitis] = { realizado: true, positivo: true }
-      Infeccion.find(@inf.id).nombre.should_not eq infeccion_params[:nombre]
-      infeccion_params[:epicrisi_id] = @epi.id
-      put :update, infeccion_params
-      body = JSON.parse(response.body)
-      Infeccion.count.should eq 1
-
-      body['infeccion']['nombre'].should == infeccion_params[:nombre]
-      Infeccion.first.nombre.should_not == @inf.nombre
-      Infeccion.first.nombre.should == infeccion_params[:nombre]
-    end
-
-    [[:shock_septico, true],
-     [:curacion, false]
+    [
+     [:shock_septico, true],
+     [:curacion, false],
+     [:nombre, 'pepe']
     ].each do |prop, value|
       it "should update infeccion #{prop}" do
-        infeccion_params = FactoryGirl.attributes_for(:infeccion, ascitis: create(:ascitis, :pos))
-        infeccion_params[:ascitis] = { realizado: true, positivo: true }
+        infeccion_params = FactoryGirl.attributes_for(:infeccion)
         infeccion_params[prop] = value
         Infeccion.find(@inf.id)[prop].should_not eq value
         infeccion_params[:epicrisi_id] = @epi.id
         put :update, infeccion_params
         body = JSON.parse(response.body)
 
-        body['infeccion']['shock_septico'].should == value
-        Infeccion.first[prop].should_not == !value
+        body['infeccion'][prop.to_s].should == value
         Infeccion.first[prop].should == value
       end
     end
@@ -52,27 +38,36 @@ describe InfeccionController do
 
   describe "Update ascitis/hemocultivos/urocultivo" do
 
-    [
-      [nil, false, false, nil],
-      [nil, true, true, true],
-      [nil, false, true, true],
-      [nil, true, false, false],
-      [false, false, true, true],
-      [false, true, false, false],
-      [false, false, false, nil],
-      [false, true, true, true],
-      [true, false, false, nil],
-      [true, true, false, false],
-      [true, false, true, true],
-      [true, true, true, true],
-    ].each do |positivoPreviousValue, realizado, positivo, positivoNewValue|
-      it "if positivo's previous value was #{positivoPreviousValue || 'nil'} and realizado is #{realizado} and 
-            positivo is #{positivo}, positivo's new value should be #{positivoNewValue}" do
-        epi = create(:epicrisis, infeccion: create(:infeccion, ascitis: create(:ascitis, positivo: positivoPreviousValue)))
-        put :update, { epicrisi_id: epi.id, ascitis: { positivo: positivo, realizado: realizado } }
-        body = JSON.parse(response.body)
-        body['infeccion']['ascitis']['positivo'].should == positivoNewValue
-        Infeccion.first.ascitis.positivo.should == positivoNewValue
+    [:ascitis, :hemocultivos].each do |cultivo|
+      [
+        [nil, false, false, nil],
+        [nil, true, true, true],
+        [nil, false, true, true],
+        [nil, true, false, false],
+        [false, false, true, true],
+        [false, true, false, false],
+        [false, false, false, nil],
+        [false, true, true, true],
+        [true, false, false, nil],
+        [true, true, false, false],
+        [true, false, true, true],
+        [true, true, true, true],
+      ].each do |positivoPreviousValue, realizado, positivo, positivoNewValue|
+        it "if positivo's previous value was #{positivoPreviousValue || 'nil'} and realizado is #{realizado} and 
+              positivo is #{positivo}, positivo's new value should be #{positivoNewValue}" do
+          epi = create(:epicrisis, infeccion: create(:infeccion, cultivo => create(cultivo, positivo: positivoPreviousValue)))
+          put :update, { epicrisi_id: epi.id, cultivo => { positivo: positivo, realizado: realizado } }
+          body = JSON.parse(response.body)
+          body['infeccion'][cultivo.to_s]['positivo'].should == positivoNewValue
+          case cultivo
+            when :ascitis
+              Infeccion.first.ascitis.positivo.should == positivoNewValue
+            when :hemocultivos
+              Infeccion.first.hemocultivos.positivo.should == positivoNewValue
+            else
+              Infeccion.first.urocultivo.positivo.should == positivoNewValue
+          end
+        end
       end
     end
 

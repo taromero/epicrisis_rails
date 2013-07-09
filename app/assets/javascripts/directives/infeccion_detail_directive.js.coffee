@@ -41,7 +41,7 @@ epicrisis.directive "infeccionDetail", ->
 				$scope.infeccion.ascitis.recuento_de_neutrofilos = null
 				$scope.infeccion.ascitis.citologico = null
 			restService.infeccion.update $scope.infeccion, (data) ->
-				$scope.infeccion = data.infeccion
+				$scope.epicrisis.infeccion = data.infeccion
 				setRealizado()
 				$scope.httpStatus = "success"
 				$scope.httpMessage = "actualizado correctamente"
