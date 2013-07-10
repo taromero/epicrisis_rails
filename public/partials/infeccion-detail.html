@@ -1,8 +1,8 @@
 <div id="infeccion" class="span4 container" style="border: 1px solid #ccc;">
 	<blockquote>
-		<strong><p class="lead">Infeccion <a class="btn" ng-click=""><i class="icon-plus"></i></a></p></strong>
+		<strong><p class="lead">Infeccion <toggle-button visible="visible"/></p></strong>
 	</blockquote>
-	<div class="content" ng-show="infeccion != null">
+	<div class="content" ng-show="visible">
 		<div>
 			Nombre
 			<input type="text" class="nombre" ng-model="infeccion.nombre"/>

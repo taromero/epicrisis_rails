@@ -9,28 +9,29 @@ epicrisis.directive "infeccionDetail", ->
 			urocultivo: null
 		standardCultivos = []
 		$scope.$watch "epicrisis", ->
-		  	if $scope.epicrisis
-		    	$scope.infeccion = $scope.epicrisis.infeccion
-		    	setRealizado()
-		    	standardCultivos = [$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]
-		    	addWatchers()
+			if $scope.epicrisis
+				$scope.infeccion = $scope.epicrisis.infeccion
+				$scope.visible = $scope.infeccion != null
+				setRealizado()
+				standardCultivos = [$scope.infeccion.ascitis, $scope.infeccion.hemocultivos, $scope.infeccion.urocultivo]
+				addWatchers()
 		addWatchers = ->
 			$scope.$watch ->
-			    _(standardCultivos).map (cultivo) -> cultivo.positivo
+				_(standardCultivos).map (cultivo) -> cultivo.positivo
 			, ->
-			    setRealizado()
+				setRealizado()
 			, true
 
 			$scope.$watch ->
-			    _(standardCultivos).map (cultivo) -> cultivo.realizado
+				_(standardCultivos).map (cultivo) -> cultivo.realizado
 			, ->
-			    _(standardCultivos).each (cultivo) ->
-			      	if cultivo?.positivo and not cultivo?.realizado
-			      		cultivo.positivo = null
+				_(standardCultivos).each (cultivo) ->
+					if cultivo?.positivo and not cultivo?.realizado
+						cultivo.positivo = null
 			, true
 		setRealizado = ->
-		  	_(standardCultivos).each (cultivo) ->
-		    	cultivo.realizado = cultivo?.positivo?
+			_(standardCultivos).each (cultivo) ->
+				cultivo.realizado = cultivo?.positivo?
 		$scope.update = ->
 			$scope.infeccion.epicrisisId = $scope.epicrisisId
 			$scope.httpStatus = "warning"
@@ -46,7 +47,7 @@ epicrisis.directive "infeccionDetail", ->
 				$scope.httpStatus = "success"
 				$scope.httpMessage = "actualizado correctamente"
 			, (resp) ->
-			    $scope.httpStatus = "error"
-			    $scope.httpMessage = resp.data.errors[0]
+				$scope.httpStatus = "error"
+				$scope.httpMessage = resp.data.errors[0]
 	templateUrl: "partials/infeccion-detail.html"
 	replace: true
