@@ -61,4 +61,11 @@ FactoryGirl.define do
   	end
   end
 
+  factory :medicacion_ingreso do
+    antibiotico_profilactico false
+    espironolactona true
+    furosemida true
+    propranolol false
+  end
+
 end

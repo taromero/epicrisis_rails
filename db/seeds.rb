@@ -13,4 +13,6 @@
 	infeccion = FactoryGirl.create(:infeccion, { nombre: 'unNombre', ascitis: FactoryGirl.create(:ascitis, :non_realized),
 												hemocultivos: FactoryGirl.create(:hemocultivos, :pos), 
 												urocultivo: FactoryGirl.create(:urocultivo) })
-	Epicrisis.create({ infeccion: infeccion })
+
+	medicacion_ingreso = FactoryGirl.create(:medicacion_ingreso)
+	Epicrisis.create({ infeccion: infeccion, medicacion_ingreso: medicacion_ingreso })
