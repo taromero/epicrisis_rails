@@ -2,7 +2,7 @@ epicrisis.directive "infeccionDetail", ->
 	restrict: "E"
 	transclude: true
 	scope: { epicrisis: '=' }
-	controller: ($scope, restService) ->
+	controller: ['$scope', 'restService', ($scope, restService) ->
 		$scope.infeccion =
 			ascitis: null
 			hemocultivos: null
@@ -49,5 +49,6 @@ epicrisis.directive "infeccionDetail", ->
 			, (resp) ->
 				$scope.httpStatus = "error"
 				$scope.httpMessage = resp.data.errors[0]
+	]
 	templateUrl: "partials/infeccion-detail.html"
 	replace: true

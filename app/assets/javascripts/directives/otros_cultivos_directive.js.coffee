@@ -2,7 +2,7 @@ epicrisis.directive 'otrosCultivos', ->
 	restrict: 'E',
 	transclude: true,
 	scope: false,
-	controller: ($scope, restService, $timeout) ->
+	controller: ['$scope', 'restService', '$timeout', ($scope, restService, $timeout) ->
 		$scope.nuevoCultivo = 
 			nombre: ''
 			positivo: false 
@@ -35,5 +35,6 @@ epicrisis.directive 'otrosCultivos', ->
 			, (resp) ->
 				$scope.httpStatus = 'error'
 				$scope.httpMessage = resp.errors[0]
+	]
 	templateUrl: 'partials/otros-cultivos.html',
 	replace: true

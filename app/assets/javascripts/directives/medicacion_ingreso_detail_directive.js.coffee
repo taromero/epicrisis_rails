@@ -2,7 +2,7 @@ epicrisis.directive "medicacionIngresoDetail", ->
 	restrict: "E"
 	transclude: true
 	scope: { epicrisis: '=' }
-	controller: ($scope, restService) ->
+	controller: ['$scope', 'restService', ($scope, restService) ->
 		$scope.$watch "epicrisis", ->
 			if $scope.epicrisis
 				$scope.medicacion_ingreso = $scope.epicrisis.medicacion_ingreso
@@ -18,5 +18,6 @@ epicrisis.directive "medicacionIngresoDetail", ->
 			, (resp) ->
 				$scope.httpStatus = "error"
 				$scope.httpMessage = resp.data.errors[0]
+	]
 	templateUrl: "partials/medicacion-ingreso-detail.html"
 	replace: true

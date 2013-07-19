@@ -1,3 +1,5 @@
+require "active_record/validations.rb"
+
 module ErrorHandlerHelper
 
   def self.included(base)

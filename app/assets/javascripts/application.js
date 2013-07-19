@@ -13,8 +13,8 @@
 
 var epicrisis = epicrisis || angular.module('epicrisis', ['ngResource', 'ui.directives']);
 
-epicrisis.config(function($routeProvider) {
+epicrisis.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/epicrisis/:id', { template: '<epicrisis-detail></epicrisis-detail>' }).
     otherwise({redirectTo: '/epicrisis/2'})
-});
+}]);
