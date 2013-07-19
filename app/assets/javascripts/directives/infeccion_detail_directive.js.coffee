@@ -1,7 +1,7 @@
 epicrisis.directive "infeccionDetail", ->
 	restrict: "E"
 	transclude: true
-	scope: false
+	scope: { epicrisis: '=' }
 	controller: ($scope, restService) ->
 		$scope.infeccion =
 			ascitis: null

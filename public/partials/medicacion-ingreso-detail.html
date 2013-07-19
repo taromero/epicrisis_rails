@@ -1,0 +1,31 @@
+<div id="medicacion_ingreso" class="span4 container" style="border: 1px solid #ccc;">
+	<blockquote>
+		<strong><p class="lead">Medicacion Ingreso <toggle-button visible="visible"/></p></strong>
+	</blockquote>
+	<div class="content" ng-show="visible">
+		<div>
+			ESPIRONOLACTONA
+			<input type="checkbox" ng-model="medicacion_ingreso.espironolactona"/>
+		</div>
+		<div>
+			FUROSEMIDA
+			<input type="checkbox" ng-model="medicacion_ingreso.furosemida"/>
+		</div>
+		<div>
+			PROPRANOLOL
+			<input type="checkbox" ng-model="medicacion_ingreso.propranolol"/>
+		</div>
+		<div>
+			ANTIBIOTICO PROFILACTICO
+			<input type="checkbox" ng-model="medicacion_ingreso.antibiotico_profilactico"/>
+		</div>
+		<div>
+			<a ng-click="update()" class="btn btn-primary">Guardar</a>
+		</div>
+	</div>
+	<table class="table status" ng-show="httpStatus != null">
+		<tr ng-class="httpStatus">
+			<td>{{ httpMessage }}</td>
+		</tr>
+	</table>
+</div>

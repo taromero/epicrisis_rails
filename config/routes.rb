@@ -6,5 +6,6 @@ EpicrisisRails::Application.routes.draw do
 
     	end
     end
+    resource :medicacion_ingreso, controller: "medicacion_ingreso"
   end
 end
